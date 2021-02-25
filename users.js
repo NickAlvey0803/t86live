@@ -9,7 +9,7 @@ app.engine('handlebars', handlebars.engine);
 var session = require('express-session');
 var bodyParser = require('body-parser');
 app.set('view engine', 'handlebars');
-app.set('port', 3000);
+app.set('port', 52111);
 
 
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -24,7 +24,7 @@ app.get('/',function(req,res,next){
       return;
     }
     context.results = JSON.parse(JSON.stringify(rows));
-    res.render('home', context);
+    res.render('users-view', context);
   });
 });
 
@@ -42,7 +42,7 @@ app.get('/insert',function(req,res,next){
         return;
       }
       context.results = JSON.parse(JSON.stringify(rows));
-      res.render('home', context);
+      res.render('users-view', context);
     });
   });
 });
@@ -60,7 +60,7 @@ app.get('/delete',function(req,res,next){
         return;
       }
       context.results = JSON.parse(JSON.stringify(rows));
-      res.render('home', context);
+      res.render('users-view', context);
     });
   });
 });
@@ -77,7 +77,7 @@ app.get('/simple-update',function(req,res,next){
       return;
     }
     context.results = JSON.parse(JSON.stringify(rows));
-    res.render('home',context);
+    res.render('users-view',context);
   });
 });
 
@@ -99,7 +99,7 @@ app.get('/safe-update',function(req,res,next){
           return;
         }
         context.results = JSON.parse(JSON.stringify(rows));
-        res.render('home',context);
+        res.render('users-view',context);
       });
     }
   });
