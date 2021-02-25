@@ -9,13 +9,13 @@ app.engine('handlebars', handlebars.engine);
 var session = require('express-session');
 var bodyParser = require('body-parser');
 app.set('view engine', 'handlebars');
-app.set('port', 34901);
+app.set('port', 52111);
 
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static('public'))
 
-app.get('/',function(req,res,next){
+app.get('/videos',function(req,res,next){
   var context = {};
   var params = [];
   mysql.pool.query('SELECT * FROM videos', function(err, rows, fields){
@@ -23,33 +23,45 @@ app.get('/',function(req,res,next){
       next(err);
       return;
     }
-    context.results = JSON.stringify(rows);
-    res.render('home', context);
+    context.results = JSON.parse(JSON.stringify(rows));
+    res.render('videos-view', context);
   });
 });
 
-app.get('/insert',function(req,res,next){
+app.get('/videos/insert',function(req,res,next){
   var context = {};
-  mysql.pool.query("INSERT INTO videos (`category`, `weight`, `uploader_weight`, `light_score`) VALUES (?,?,?,?)", 
-    [req.query.category, req.query.weight, req.query.uploader_weight, req.query.light_score], function(err, result){
+  mysql.pool.query("INSERT INTO videos (`category`, `weight`, `uploader_weight`, `light_score`, `uid`) VALUES (?,?,?,?,?)", 
+    [req.query.category, req.query.weight, req.query.uploader_weight, req.query.light_score, req.query.uid], function(err, result){
     if(err){
       next(err);
       return;
     }
-    context.results = "Inserted id " + result.insertId;
-    res.render('home',context);
+    mysql.pool.query('SELECT * FROM videos', function(err, rows, fields){
+      if(err){
+        next(err);
+        return;
+      }
+      context.results = JSON.parse(JSON.stringify(rows));
+      res.render('videos-view', context);
+    });
   });
 });
 
-app.get('/delete',function(req,res,next){
+app.get('/videos/delete',function(req,res,next){
   var context = {};
-  mysql.pool.query("DELETE FROM workouts WHERE id=?", [req.query.id], function(err, result){
+  mysql.pool.query("DELETE FROM videos WHERE id=?", [req.query.id], function(err, result){
     if(err){
       next(err);
       return;
     }
-    context.results = "Deleted " + result.changedRows + " rows.";
-    res.render('home',context);
+    mysql.pool.query('SELECT * FROM videos', function(err, rows, fields){
+      if(err){
+        next(err);
+        return;
+      }
+      context.results = JSON.parse(JSON.stringify(rows));
+      res.render('videos-view', context);
+    });
   });
 });
 
@@ -64,8 +76,8 @@ app.get('/simple-update',function(req,res,next){
       next(err);
       return;
     }
-    context.results = "Updated " + result.changedRows + " rows.";
-    res.render('home',context);
+    context.results = JSON.parse(JSON.stringify(rows));
+    res.render('users-view',context);
   });
 });
 
@@ -86,29 +98,12 @@ app.get('/safe-update',function(req,res,next){
           next(err);
           return;
         }
-        context.results = "Updated " + result.changedRows + " rows.";
-        res.render('home',context);
+        context.results = JSON.parse(JSON.stringify(rows));
+        res.render('users-view',context);
       });
     }
   });
 });
-
-// app.get('/reset-table',function(req,res,next){
-//   var context = {};
-//   mysql.pool.query("DROP TABLE IF EXISTS workouts", function(err){ //replace your connection pool with the your variable containing the connection pool
-//     var createString = "CREATE TABLE workouts("+
-//     "id INT PRIMARY KEY AUTO_INCREMENT,"+
-//     "name VARCHAR(255) NOT NULL,"+
-//     "reps INT,"+
-//     "weight INT,"+
-//     "date DATE,"+
-//     "lbs BOOLEAN)";
-//     mysql.pool.query(createString, function(err){
-//       context.results = "Table reset";
-//       res.render('home',context);
-//     })
-//   });
-// });
 
 app.use(function(req,res){
   res.status(404);

@@ -28,42 +28,46 @@
 
 <form>
   <fieldset>
-    <legend>Set Up Your Account</legend>
-    <label for="username">Username: </label>
-    <input type="text" name="username" id="username">
-    <label for="password">Password: </label>
-    <input type="text" name="password" id="password">
-    <label for="description">Describe Yourself: </label>
-    <input type="text" name="description" id="description">
-    <label for="user_score">What's Your Score?: </label>
-    <input type="text" name="user_score" id="user_score">
-    <input type="submit" id="userSubmit">
+    <legend>Upload Some Information About Your Video</legend>
+    <label for="category">Category (Type of Lift): </label>
+    <input type="text" name="category" id="category">
+    <label for="weight">How Much Did You Lift?: </label>
+    <input type="text" name="weight" id="weight">
+    <label for="uploader_weight">How Much Do You Weigh?: </label>
+    <input type="text" name="uploader_weight" id="uploader_weight">
+    <label for="light_score">Enter the Initial Score (will be updated by comments): </label>
+    <input type="text" name="light_score" id="light_score">
+    <label for="uid">What is Your Username? (Functionality is not here yet, for now enter UID): </label>
+    <input type="text" name="uid" id="uid">
+    <input type="submit" id="videoSubmit">
   </fieldset>
 </form>
 
 <table class= "bodydiv">
+
     <tr>
+        <th>UID</th>
         <th>Username</th>
         <th>Password</th>
         <th>Description</th>
-        <th>User Score</th>
+        <th>light_score</th>
         <th>Edit/Delete</th>
     </tr>
 
     {{#each results}}
     <tr>
-        
-        <td>{{this.username}}</td>
-        <td>{{this.password}}</td>
-        <td>{{this.description}}</td>
+        <td>{{this.uid}}</td>
+        <td>{{this.category}}</td>
+        <td>{{this.weight}}</td>
+        <td>{{this.uploader_weight}}</td>
         <td>{{this.user_score}}</td>
         <td>
             <form method="get">
-                <input type="hidden", name = "id", id = "id", value="{{this.user_id}}">
+                <input type="hidden", name = "id", id = "id", value="{{this.video_id}}">
                 <input type="submit", name = "deleteSubmit", , id = "deleteSubmit", value="DELETE">
             </form>
             <form method="get">
-                <input type="hidden", name = "id", id = "id", value="{{this.user_id}}">
+                <input type="hidden", name = "id", id = "id", value="{{this.video_id}}">
                 <input type="submit", name = "editSubmit", id="editSubmit", value="EDIT">
             </form>
 
@@ -72,4 +76,3 @@
     {{/each}}
    
 </table>
-

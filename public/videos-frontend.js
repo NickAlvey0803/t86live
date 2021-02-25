@@ -2,20 +2,21 @@ document.addEventListener('DOMContentLoaded', bindButtons)
 document.addEventListener('DOMContentLoaded', bindButtons2)
 
 function bindButtons(){
-  document.getElementById('userSubmit').addEventListener('click', function(event){
+  document.getElementById('videoSubmit').addEventListener('click', function(event){
       var req = new XMLHttpRequest();
-      var payload = {username:null, weight:null, description:null, user_score:null};
-      payload.username = document.getElementById('username').value;
+      var payload = {category:null, weight:null, uploader_weight:null, light_score:null, uid:null};
+      payload.category = document.getElementById('category').value;
       payload.weight = document.getElementById('weight').value;
       payload.uploader_weight = document.getElementById('uploader_weight').value;
-      payload.user_score = document.getElementById('user_score').value;
+      payload.light_score = document.getElementById('light_score').value;
+      payload.uid = document.getElementById('uid').value;
 
       
-      console.log('http://flip3.engr.oregonstate.edu:52111/users/insert?username=' + payload.username + '&weight=' 
-        + payload.weight + '&uploader_weight='+ payload.uploader_weight + '&user_score=' + payload.user_score);
+      console.log('http://flip3.engr.oregonstate.edu:52111/videos/insert?categorye=' + payload.category + '&weight=' 
+        + payload.weight + '&uploader_weight='+ payload.uploader_weight + '&light_score=' + payload.light_score + '&uid=' + payload.uid);
 
-      req.open('GET', 'http://flip3.engr.oregonstate.edu:52111/users/insert?username=' + payload.username + '&weight=' 
-        + payload.weight + '&uploader_weightn='+ payload.uploader_weight + '&user_score=' + payload.user_score);
+      req.open('GET', 'http://flip3.engr.oregonstate.edu:52111/videos/insert?category=' + payload.category + '&weight=' 
+        + payload.weight + '&uploader_weight='+ payload.uploader_weight + '&light_score=' + payload.light_score + '&uid=' + payload.uid);
       
 
 
