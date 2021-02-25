@@ -24,7 +24,7 @@ app.get('/',function(req,res,next){
       return;
     }
     context.results = JSON.stringify(rows);
-    res.render('users', context);
+    res.render('users-view', context);
   });
 });
 
