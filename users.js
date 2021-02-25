@@ -66,6 +66,59 @@ app.get('/users/delete',function(req,res,next){
 });
 
 
+app.get('/videos',function(req,res,next){
+  var context = {};
+  var params = [];
+  mysql.pool.query('SELECT * FROM videos', function(err, rows, fields){
+    if(err){
+      next(err);
+      return;
+    }
+    context.results = JSON.parse(JSON.stringify(rows));
+    res.render('videos-view', context);
+  });
+});
+
+app.get('/videos/insert',function(req,res,next){
+  var context = {};
+  mysql.pool.query("INSERT INTO videos (`category`, `weight`, `uploader_weight`, `light_score`, `uid`) VALUES (?,?,?,?,?)", 
+    [req.query.category, req.query.weight, req.query.uploader_weight, req.query.light_score, req.query.uid], function(err, result){
+    if(err){
+      next(err);
+      return;
+    }
+    mysql.pool.query('SELECT * FROM videos', function(err, rows, fields){
+      if(err){
+        next(err);
+        return;
+      }
+      context.results = JSON.parse(JSON.stringify(rows));
+      res.render('videos-view', context);
+    });
+  });
+});
+
+app.get('/videos/delete',function(req,res,next){
+  var context = {};
+  mysql.pool.query("DELETE FROM videos WHERE id=?", [req.query.id], function(err, result){
+    if(err){
+      next(err);
+      return;
+    }
+    mysql.pool.query('SELECT * FROM videos', function(err, rows, fields){
+      if(err){
+        next(err);
+        return;
+      }
+      context.results = JSON.parse(JSON.stringify(rows));
+      res.render('videos-view', context);
+    });
+  });
+});
+
+
+
+
 ///simple-update?id=2&name=The+Task&done=false&due=2015-12-5
 app.get('/simple-update',function(req,res,next){
   var context = {};
