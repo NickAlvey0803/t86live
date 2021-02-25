@@ -5,12 +5,11 @@ document.addEventListener('DOMContentLoaded', bindButtons)
 function bindButtons(){
   document.getElementById('workoutSubmit').addEventListener('click', function(event){
       var req = new XMLHttpRequest();
-      var payload = {name:null, reps:null, weight:null, date:null, unit:null};
-      payload.name = document.getElementById('name').value;
-      payload.reps = document.getElementById('reps').value;
+      var payload = {category:null, weight:null, uploader_weight:null, light_score:null};
+      payload.category = document.getElementById('category').value;
       payload.weight = document.getElementById('weight').value;
-      payload.date = document.getElementById('date').value;
-      payload.lbs = document.getElementById('lbs').value;
+      payload.uploader_weight = document.getElementById('uploader_weight').value;
+      payload.light_score = document.getElementById('light_score').value;
 
       
       console.log('http://flip3.engr.oregonstate.edu:34901/insert?name=' + payload.name + '&reps=' 

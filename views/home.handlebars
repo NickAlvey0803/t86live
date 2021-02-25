@@ -12,16 +12,14 @@
 <form>
   <fieldset>
     <legend>Input Data to Enter into Table</legend>
-    <label for="name">Name: </label>
-    <input type="text" name="name" id="name">
-    <label for="reps">Number of Reps: </label>
-    <input type="text" name="reps" id="reps">
-    <label for="weight">Weight Done: </label>
+    <label for="category">Category: </label>
+    <input type="text" name="category" id="category">
+    <label for="weight">Weight Completed: </label>
     <input type="text" name="weight" id="weight">
-    <label for="date">Date Performed (Enter as YYYY-MM-DD): </label>
-    <input type="text" name="date" id="date">
-    <label for="lbs">Lbs? (TRUE is Lbs, FALSE is Kg): </label>
-    <input type="text" name="lbs" id="lbs">
+    <label for="uploader_weight">Uploader Weight: </label>
+    <input type="text" name="uploader_weight" id="uploader_weight">
+    <label for="light_score">Lbs? (TRUE is Lbs, FALSE is Kg): </label>
+    <input type="text" name="light_score" id="light_score">
     <input type="submit" id="workoutSubmit">
   </fieldset>
 </form>
@@ -29,21 +27,19 @@
 <table>
 	<tr>
 		<th>ID</th>
-		<th>Workout Name</th>
-		<th>Number of Reps</th>
-		<th>Weight Done</th>
-		<th>Date Performed</th>
-		<th>Unit of Measurement</th>
+		<th>Workout Category</th>
+		<th>Weight Completed</th>
+		<th>Uploader Weight</th>
+		<th>Light Score Passing</th>
 	</tr>
 
     {{#each results}}
     <tr>
     	
-    	<td>{{this.name}}</td>
-    	<td>{{this.reps}}</td>
+    	<td>{{this.category}}</td>
     	<td>{{this.weight}}</td>
-    	<td>{{this.date}}</td>
-    	<td>{{this.unit}}</td>
+    	<td>{{this.uploader_weight}}</td>
+    	<td>{{this.light_score}}</td>
     </tr>
     {{/each}}
    
