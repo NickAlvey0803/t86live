@@ -1,7 +1,7 @@
 
 <head>
-    <title>Users of Whitelights</title>
-    <h1 class="page_header">Users</h1>
+    <title>Videos of Whitelights</title>
+    <h1 class="page_header">Videos</h1>
     <link rel="stylesheet" href="team86_style.css">
 </head>
 
@@ -13,7 +13,7 @@
 
 </style>
 
-<script src="/users-frontend.js"></script>
+<script src="/videos-frontend.js"></script>
 
 <div class="nav_list">
             <nav>
@@ -35,7 +35,7 @@
     <input type="text" name="weight" id="weight">
     <label for="uploader_weight">How Much Do You Weigh?: </label>
     <input type="text" name="uploader_weight" id="uploader_weight">
-    <label for="light_score">Enter the Initial Score (will be updated by comments): </label>
+    <label for="light_score">Enter the Initial Score (will be updated by comments, enter TRUE for passing, FALSE for not passing): </label>
     <input type="text" name="light_score" id="light_score">
     <label for="uid">What is Your Username? (Functionality is not here yet, for now enter UID): </label>
     <input type="text" name="uid" id="uid">
@@ -50,7 +50,7 @@
         <th>Username</th>
         <th>Password</th>
         <th>Description</th>
-        <th>light_score</th>
+        <th>Light Score</th>
         <th>Edit/Delete</th>
     </tr>
 
@@ -60,7 +60,7 @@
         <td>{{this.category}}</td>
         <td>{{this.weight}}</td>
         <td>{{this.uploader_weight}}</td>
-        <td>{{this.user_score}}</td>
+        <td>{{this.light_score}}</td>
         <td>
             <form method="get">
                 <input type="hidden", name = "id", id = "id", value="{{this.video_id}}">

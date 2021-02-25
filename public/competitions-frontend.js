@@ -2,21 +2,20 @@ document.addEventListener('DOMContentLoaded', bindButtons)
 document.addEventListener('DOMContentLoaded', bindButtons2)
 
 function bindButtons(){
-  document.getElementById('videoSubmit').addEventListener('click', function(event){
+  document.getElementById('competitionSubmit').addEventListener('click', function(event){
       var req = new XMLHttpRequest();
-      var payload = {category:null, weight:null, uploader_weight:null, light_score:null, uid:null};
-      payload.category = document.getElementById('category').value;
-      payload.weight = document.getElementById('weight').value;
-      payload.uploader_weight = document.getElementById('uploader_weight').value;
-      payload.light_score = document.getElementById('light_score').value;
-      payload.uid = document.getElementById('uid').value;
+      var payload = {competition_name:null, lift_type:null, weight_class:null, lift_reps:null};
+      payload.competition_name = document.getElementById('competition_name').value;
+      payload.lift_type = document.getElementById('lift_type').value;
+      payload.weight_class = document.getElementById('weight_class').value;
+      payload.lift_reps = document.getElementById('lift_reps').value;
 
       
-      console.log('http://flip3.engr.oregonstate.edu:52111/videos/insert?category=' + payload.category + '&weight=' 
-        + payload.weight + '&uploader_weight='+ payload.uploader_weight + '&light_score=' + payload.light_score + '&uid=' + payload.uid);
+      console.log('http://flip3.engr.oregonstate.edu:52111/videos/insert?competition_name=' + payload.competition_name + '&lift_type=' 
+        + payload.lift_type + '&weight_class='+ payload.weight_class + '&lift_reps=' + payload.lift_reps);
 
-      req.open('GET', 'http://flip3.engr.oregonstate.edu:52111/videos/insert?category=' + payload.category + '&weight=' 
-        + payload.weight + '&uploader_weight='+ payload.uploader_weight + '&light_score=' + payload.light_score + '&uid=' + payload.uid);
+      req.open('GET', 'http://flip3.engr.oregonstate.edu:52111/videos/insert?competition_name=' + payload.competition_name + '&lift_type=' 
+        + lift_type + '&weight_class='+ payload.weight_class + '&lift_reps=' + payload.lift_reps);
       
 
 
