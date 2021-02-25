@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', bindButtons)
 document.addEventListener('DOMContentLoaded', bindButtons2)
 
 function bindButtons(){
-  document.getElementById('workoutSubmit').addEventListener('click', function(event){
+  document.getElementById('userSubmit').addEventListener('click', function(event){
       var req = new XMLHttpRequest();
       var payload = {username:null, password:null, description:null, user_score:null};
       payload.username = document.getElementById('username').value;
