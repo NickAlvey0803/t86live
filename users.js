@@ -15,7 +15,7 @@ app.set('port', 52111);
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static('public'))
 
-app.get('/',function(req,res,next){
+app.get('/users',function(req,res,next){
   var context = {};
   var params = [];
   mysql.pool.query('SELECT * FROM users', function(err, rows, fields){
@@ -28,7 +28,7 @@ app.get('/',function(req,res,next){
   });
 });
 
-app.get('/insert',function(req,res,next){
+app.get('/users/insert',function(req,res,next){
   var context = {};
   mysql.pool.query("INSERT INTO users (`username`, `password`, `description`, `user_score`) VALUES (?,?,?,?)", 
     [req.query.username, req.query.password, req.query.description, req.query.user_score], function(err, result){
@@ -47,7 +47,7 @@ app.get('/insert',function(req,res,next){
   });
 });
 
-app.get('/delete',function(req,res,next){
+app.get('/users/delete',function(req,res,next){
   var context = {};
   mysql.pool.query("DELETE FROM users WHERE id=?", [req.query.id], function(err, result){
     if(err){
@@ -105,7 +105,7 @@ app.get('/safe-update',function(req,res,next){
   });
 });
 
-app.get('/reset-table',function(req,res,next){
+app.get('/users/reset-table',function(req,res,next){
   var context = {};
   mysql.pool.query("DROP TABLE IF EXISTS users", function(err){ //replace your connection pool with the your variable containing the connection pool
     var createString = "CREATE TABLE users ("+
