@@ -11,10 +11,10 @@ function bindButtons(){
       payload.lift_reps = document.getElementById('lift_reps').value;
 
       
-      console.log('http://flip3.engr.oregonstate.edu:52111/videos/insert?competition_name=' + payload.competition_name + '&lift_type=' 
+      console.log('http://flip3.engr.oregonstate.edu:52112/competitions/insert?competition_name=' + payload.competition_name + '&lift_type=' 
         + payload.lift_type + '&weight_class='+ payload.weight_class + '&lift_reps=' + payload.lift_reps);
 
-      req.open('GET', 'http://flip3.engr.oregonstate.edu:52111/videos/insert?competition_name=' + payload.competition_name + '&lift_type=' 
+      req.open('GET', 'http://flip3.engr.oregonstate.edu:52112/competitions/insert?competition_name=' + payload.competition_name + '&lift_type=' 
         + lift_type + '&weight_class='+ payload.weight_class + '&lift_reps=' + payload.lift_reps);
       
 

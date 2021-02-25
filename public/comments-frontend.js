@@ -11,10 +11,10 @@ function bindButtons(){
       payload.light_score = document.getElementById('light_score').value;
 
       
-      console.log('http://flip3.engr.oregonstate.edu:52111/videos/insert?uid=' + payload.uid + '&vid=' 
+      console.log('http://flip3.engr.oregonstate.edu:52112/comments/insert?uid=' + payload.uid + '&vid=' 
         + payload.vid + '&description='+ payload.description + '&light_score=' + payload.light_score);
 
-      req.open('GET', 'http://flip3.engr.oregonstate.edu:52111/videos/insert?uid=' + payload.uid + '&vid=' 
+      req.open('GET', 'http://flip3.engr.oregonstate.edu:52112/comments/insert?uid=' + payload.uid + '&vid=' 
         + vid + '&description='+ payload.description + '&light_score=' + payload.light_score);
       
 

@@ -11,11 +11,11 @@ function bindButtons(){
       payload.user_score = document.getElementById('user_score').value;
 
       
-      console.log('http://flip3.engr.oregonstate.edu:52111/users/insert?username=' + payload.username + '&weight=' 
+      console.log('http://flip3.engr.oregonstate.edu:52112/users/insert?username=' + payload.username + '&weight=' 
         + payload.weight + '&uploader_weight='+ payload.uploader_weight + '&user_score=' + payload.user_score);
 
-      req.open('GET', 'http://flip3.engr.oregonstate.edu:52111/users/insert?username=' + payload.username + '&weight=' 
-        + payload.weight + '&uploader_weightn='+ payload.uploader_weight + '&user_score=' + payload.user_score);
+      req.open('GET', 'http://flip3.engr.oregonstate.edu:52112/users/insert?username=' + payload.username + '&weight=' 
+        + payload.weight + '&uploader_weight='+ payload.uploader_weight + '&user_score=' + payload.user_score);
       
 
 
