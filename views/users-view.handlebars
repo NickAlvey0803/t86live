@@ -1,0 +1,48 @@
+<h1>Users:</h1>
+
+<style>
+	table, th, td {
+		border: 1px solid black;
+	}
+
+</style>
+
+<script src="/users-frontend.js"></script>
+
+<form>
+  <fieldset>
+    <legend>Input Data to Enter into Table</legend>
+    <label for="username">Username: </label>
+    <input type="text" name="username" id="username">
+    <label for="password">Password: </label>
+    <input type="text" name="password" id="password">
+    <label for="description">Describe Yourself: </label>
+    <input type="text" name="description" id="description">
+    <label for="user_score">What's Your Score?: </label>
+    <input type="text" name="user_score" id="user_score">
+    <input type="submit" id="userSubmit">
+  </fieldset>
+</form>
+
+<table>
+	<tr>
+		<th>ID</th>
+		<th>Username</th>
+		<th>Password</th>
+		<th>Description</th>
+		<th>User Score</th>
+	</tr>
+
+    {{#each results}}
+    <tr>
+    	
+    	<td>{{this.username}}</td>
+    	<td>{{this.password}}</td>
+    	<td>{{this.description}}</td>
+    	<td>{{this.user_score}}</td>
+    </tr>
+    {{/each}}
+   
+</table>
+
+<p>{{results}}</p>

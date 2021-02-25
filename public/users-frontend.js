@@ -1,20 +1,20 @@
 document.addEventListener('DOMContentLoaded', bindButtons)
 
 function bindButtons(){
-  document.getElementById('workoutSubmit').addEventListener('click', function(event){
+  document.getElementById('userSubmit').addEventListener('click', function(event){
       var req = new XMLHttpRequest();
-      var payload = {category:null, weight:null, uploader_weight:null, light_score:null};
-      payload.category = document.getElementById('category').value;
-      payload.weight = document.getElementById('weight').value;
-      payload.uploader_weight = document.getElementById('uploader_weight').value;
-      payload.light_score = document.getElementById('light_score').value;
+      var payload = {username:null, password:null, description:null, user_score:null};
+      payload.username = document.getElementById('username').value;
+      payload.password = document.getElementById('password').value;
+      payload.description = document.getElementById('description').value;
+      payload.user_score = document.getElementById('user_score').value;
 
       
-      console.log('http://flip3.engr.oregonstate.edu:34901/insert?category=' + payload.category + '&weight=' 
-        + payload.weight + '&uploader_weight='+ payload.uploader_weight + 'light_score=' + payload.light_score)
+      console.log('http://flip3.engr.oregonstate.edu:34901/insert?username=' + payload.username + '&password=' 
+        + payload.password + '&description='+ payload.description + 'user_score=' + payload.user_score)
 
-      req.open('GET', 'http://flip3.engr.oregonstate.edu:34901/insert?category=' + payload.category + '&weight=' 
-        + payload.weight + '&uploader_weight='+ payload.uploader_weight + 'light_score=' + payload.light_score, true);
+      req.open('GET', 'http://flip3.engr.oregonstate.edu:34901/insert?username=' + payload.username + '&password=' 
+        + payload.password + '&description='+ payload.description + 'user_score=' + payload.user_score);
       
 
 
