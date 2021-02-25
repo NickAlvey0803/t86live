@@ -2,22 +2,19 @@ document.addEventListener('DOMContentLoaded', bindButtons)
 document.addEventListener('DOMContentLoaded', bindButtons2)
 
 function bindButtons(){
-  document.getElementById('commentSubmit').addEventListener('click', function(event){
+  document.getElementById('video_competitionSubmit').addEventListener('click', function(event){
       var req = new XMLHttpRequest();
-      var payload = {uid:null, vid:null, description:null, light_score:null};
-      payload.uid = document.getElementById('uid').value;
+      var payload = {vid:null, cid:null};
       payload.vid = document.getElementById('vid').value;
-      payload.description = document.getElementById('description').value;
-      payload.light_score = document.getElementById('light_score').value;
+      payload.cid = document.getElementById('cid').value;
 
       
-      console.log('http://flip3.engr.oregonstate.edu:52111/videos/insert?uid=' + payload.uid + '&vid=' 
-        + payload.vid + '&description='+ payload.description + '&light_score=' + payload.light_score);
+      console.log('http://flip3.engr.oregonstate.edu:52111/videos/insert?vid=' + payload.vid + '&cid=' 
+        + payload.cid);
 
-      req.open('GET', 'http://flip3.engr.oregonstate.edu:52111/videos/insert?uid=' + payload.uid + '&vid=' 
-        + vid + '&description='+ payload.description + '&light_score=' + payload.light_score);
+      req.open('GET', 'http://flip3.engr.oregonstate.edu:52111/videos/insert?vid=' + payload.vid + '&cid=' 
+        + cid);
       
-
 
       req.setRequestHeader('Content-Type', 'application/json');
 

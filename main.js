@@ -241,6 +241,63 @@ app.get('/comments/delete',function(req,res,next){
 });
 
 
+
+// Videos_Competitions
+
+
+
+app.get('/videos_competitions',function(req,res,next){
+  var context = {};
+  var params = [];
+  mysql.pool.query('SELECT * FROM videos_competitions', function(err, rows, fields){
+    if(err){
+      next(err);
+      return;
+    }
+    context.results = JSON.parse(JSON.stringify(rows));
+    res.render('videos_competitions-view', context);
+  });
+});
+
+app.get('/videos_competitions/insert',function(req,res,next){
+  var context = {};
+  mysql.pool.query("INSERT INTO videos_competitions (`vid`, `cid`) VALUES (?,?)", 
+    [req.query.vid, req.query.cid], function(err, result){
+    if(err){
+      next(err);
+      return;
+    }
+    mysql.pool.query('SELECT * FROM videos_competitions', function(err, rows, fields){
+      if(err){
+        next(err);
+        return;
+      }
+      context.results = JSON.parse(JSON.stringify(rows));
+      res.render('videos_competitions-view', context);
+    });
+  });
+});
+
+app.get('/videos_competitions/delete',function(req,res,next){
+  var context = {};
+  mysql.pool.query("DELETE FROM videos_competitions WHERE id=?", [req.query.id], function(err, result){
+    if(err){
+      next(err);
+      return;
+    }
+    mysql.pool.query('SELECT * FROM videos_competitions', function(err, rows, fields){
+      if(err){
+        next(err);
+        return;
+      }
+      context.results = JSON.parse(JSON.stringify(rows));
+      res.render('videos_competitions-view', context);
+    });
+  });
+});
+
+
+
 ///simple-update?id=2&name=The+Task&done=false&due=2015-12-5
 // app.get('/simple-update',function(req,res,next){
 //   var context = {};
