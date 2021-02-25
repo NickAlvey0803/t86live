@@ -1,13 +1,13 @@
 <h1>Users:</h1>
 
 <style>
-	table, th, td {
-		border: 1px solid black;
-	}
+    table, th, td {
+        border: 1px solid black;
+    }
 
 </style>
 
-<script src="/users-frontend.js"></script>
+<script src="/home.js"></script>
 
 <form>
   <fieldset>
@@ -25,24 +25,35 @@
 </form>
 
 <table>
-	<tr>
-		<th>ID</th>
-		<th>Username</th>
-		<th>Password</th>
-		<th>Description</th>
-		<th>User Score</th>
-	</tr>
+    <tr>
+        <th>Username</th>
+        <th>Password</th>
+        <th>Description</th>
+        <th>User Score</th>
+        <th>Edit/Delete</th>
+    </tr>
 
     {{#each results}}
     <tr>
-    	<td>{{this.user_id}}</td>
-    	<td>{{this.username}}</td>
-    	<td>{{this.password}}</td>
-    	<td>{{this.description}}</td>
-    	<td>{{this.user_score}}</td>
+        
+        <td>{{this.name}}</td>
+        <td>{{this.username}}</td>
+        <td>{{this.password}}</td>
+        <td>{{this.description}}</td>
+        <td>{{this.user_score}}</td>
+        <td>
+            <form method="get">
+                <input type="hidden", name = "id", id = "id", value="{{this.user_id}}">
+                <input type="submit", name = "deleteSubmit", , id = "deleteSubmit", value="DELETE">
+            </form>
+            <form method="get">
+                <input type="hidden", name = "id", id = "id", value="{{this.user_id}}">
+                <input type="submit", name = "editSubmit", id="editSubmit", value="EDIT">
+            </form>
+
+        </td>
     </tr>
     {{/each}}
    
 </table>
 
-<p>{{#each results}}{{/each}}</p>

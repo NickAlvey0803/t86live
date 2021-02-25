@@ -1,7 +1,8 @@
 document.addEventListener('DOMContentLoaded', bindButtons)
+document.addEventListener('DOMContentLoaded', bindButtons2)
 
 function bindButtons(){
-  document.getElementById('userSubmit').addEventListener('click', function(event){
+  document.getElementById('workoutSubmit').addEventListener('click', function(event){
       var req = new XMLHttpRequest();
       var payload = {username:null, password:null, description:null, user_score:null};
       payload.username = document.getElementById('username').value;
@@ -22,18 +23,33 @@ function bindButtons(){
 
       req.addEventListener('load',function(){
         if(req.status >= 200 && req.status < 400){
-          var response = JSON.parse(req.responseText);
-          // document.getElementById('temp').textContent = response.main.temp + " degrees";
-          // document.getElementById('feels_like').textContent = response.main.feels_like + " degrees";
-          // document.getElementById('humidity').textContent = response.main.humidity + "%";
-          // document.getElementById('description').textContent = response.weather[0].description;
-          // document.getElementById('temp_max').textContent = response.main.temp_max + " degrees";
-          // document.getElementById('temp_min').textContent = response.main.temp_min + " degrees";
-          console.log(response)
+          
         } else {
           console.log("Error in network request: " + req.statusText);
         }});
       req.send(null);
-      // event.preventDefault();
+      //event.preventDefault();
     });
 };
+
+// if(document.getElementById('deleteSubmit') !== null){
+function bindButtons2(){
+     document.getElementById('deleteSubmit').addEventListener('click', function(event){
+        var req = new XMLHttpRequest();
+        var payload = {id:null};
+        payload.id = getElementById("id").value;
+
+        req.open('GET', 'http://localhost:3000/delete?id=' + payload.id, true);
+
+        req.setRequestHeader('Content-Type', 'application/json');
+
+        req.addEventListener('load',function(){
+          if(req.status >= 200 && req.status < 400){
+            
+          } else {
+            console.log("Error in network request: " + req.statusText);
+          }});
+        req.send(null);
+    //event.preventDefault();
+  });
+}

@@ -9,7 +9,7 @@ app.engine('handlebars', handlebars.engine);
 var session = require('express-session');
 var bodyParser = require('body-parser');
 app.set('view engine', 'handlebars');
-app.set('port', 34901);
+app.set('port', 3000);
 
 
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -23,8 +23,8 @@ app.get('/',function(req,res,next){
       next(err);
       return;
     }
-    context.results = JSON.stringify(rows);
-    res.render('users-view', context);
+    context.results = JSON.parse(JSON.stringify(rows));
+    res.render('home', context);
   });
 });
 
@@ -36,20 +36,32 @@ app.get('/insert',function(req,res,next){
       next(err);
       return;
     }
-    context.results = "Inserted id " + result.insertId;
-    res.render('users-view',context);
+    mysql.pool.query('SELECT * FROM users', function(err, rows, fields){
+      if(err){
+        next(err);
+        return;
+      }
+      context.results = JSON.parse(JSON.stringify(rows));
+      res.render('home', context);
+    });
   });
 });
 
 app.get('/delete',function(req,res,next){
   var context = {};
-  mysql.pool.query("DELETE FROM workouts WHERE id=?", [req.query.id], function(err, result){
+  mysql.pool.query("DELETE FROM users WHERE id=?", [req.query.id], function(err, result){
     if(err){
       next(err);
       return;
     }
-    context.results = "Deleted " + result.changedRows + " rows.";
-    res.render('users-view',context);
+    mysql.pool.query('SELECT * FROM users', function(err, rows, fields){
+      if(err){
+        next(err);
+        return;
+      }
+      context.results = JSON.parse(JSON.stringify(rows));
+      res.render('home', context);
+    });
   });
 });
 
@@ -64,8 +76,8 @@ app.get('/simple-update',function(req,res,next){
       next(err);
       return;
     }
-    context.results = "Updated " + result.changedRows + " rows.";
-    res.render('users-view',context);
+    context.results = JSON.parse(JSON.stringify(rows));
+    res.render('home',context);
   });
 });
 
@@ -86,8 +98,8 @@ app.get('/safe-update',function(req,res,next){
           next(err);
           return;
         }
-        context.results = "Updated " + result.changedRows + " rows.";
-        res.render('users-view',context);
+        context.results = JSON.parse(JSON.stringify(rows));
+        res.render('home',context);
       });
     }
   });
@@ -95,8 +107,8 @@ app.get('/safe-update',function(req,res,next){
 
 app.get('/reset-table',function(req,res,next){
   var context = {};
-  mysql.pool.query("DROP TABLE IF EXISTS `users`", function(err){ //replace your connection pool with the your variable containing the connection pool
-    var createString = "CREATE TABLE `users` ("+
+  mysql.pool.query("DROP TABLE IF EXISTS users", function(err){ //replace your connection pool with the your variable containing the connection pool
+    var createString = "CREATE TABLE users ("+
     "user_id int(11) NOT NULL AUTO_INCREMENT,"+
     "username varchar(255) NOT NULL,"+
     "password varchar(255) NOT NULL,"+
@@ -105,8 +117,8 @@ app.get('/reset-table',function(req,res,next){
     "PRIMARY KEY (user_id),"+
     "UNIQUE KEY username (username)";
     mysql.pool.query(createString, function(err){
-      context.results = "Table reset";
-      res.render('users-view',context);
+      context.results = "Table Reset"
+      res.render('home',context);
     })
   });
 });
