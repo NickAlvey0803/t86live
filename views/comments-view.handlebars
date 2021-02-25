@@ -1,7 +1,7 @@
 
 <head>
-    <title>Videos of Whitelights</title>
-    <h1 class="page_header">Videos</h1>
+    <title>Competitoins of Whitelights</title>
+    <h1 class="page_header">Competitions</h1>
     <link rel="stylesheet" href="team86_style.css">
 </head>
 
@@ -13,7 +13,7 @@
 
 </style>
 
-<script src="/videos-frontend.js"></script>
+<script src="/commentss-frontend.js"></script>
 
 <div class="nav_list">
             <nav>
@@ -30,46 +30,44 @@
 
 <form>
   <fieldset>
-    <legend>Upload Some Information About Your Video</legend>
-    <label for="category">Category (Type of Lift): </label>
-    <input type="text" name="category" id="category">
-    <label for="weight">How Much Did You Lift?: </label>
-    <input type="text" name="weight" id="weight">
-    <label for="uploader_weight">How Much Do You Weigh?: </label>
-    <input type="text" name="uploader_weight" id="uploader_weight">
-    <label for="light_score">Enter the Initial Score (will be updated by comments, enter TRUE for passing, FALSE for not passing): </label>
-    <input type="text" name="light_score" id="light_score">
-    <label for="uid">What is Your Username? (Functionality is not here yet, for now enter UID): </label>
+    <legend>Upload Your Comment</legend>
+    <label for="uid">Enter Your Username (functionality is currently not here, enter UID): </label>
     <input type="text" name="uid" id="uid">
-    <input type="submit" id="videoSubmit">
+    <label for="vid">Enter the Title of the Video You Wish To Comment On (functionality is currently not here, enter VID): </label>
+    <input type="text" name="vid" id="vid">
+    <label for="description">Enter Your Comment: </label>
+    <input type="text" name="description" id="description">
+    <label for="light_score">What Would You Score It (enter TRUE for a White Light and FALSE for a Red Light): </label>
+    <input type="text" name="light_score" id="light_score">
+    <input type="submit" id="commentSubmit">
   </fieldset>
 </form>
 
 <table class= "bodydiv">
 
     <tr>
+
         <th>UID</th>
-        <th>Username</th>
-        <th>Password</th>
-        <th>Description</th>
+        <th>VID</th>
+        <th>Comment</th>
         <th>Light Score</th>
         <th>Edit/Delete</th>
     </tr>
 
     {{#each results}}
     <tr>
+        
         <td>{{this.uid}}</td>
-        <td>{{this.category}}</td>
-        <td>{{this.weight}}</td>
-        <td>{{this.uploader_weight}}</td>
+        <td>{{this.vid}}</td>
+        <td>{{this.description}}</td>
         <td>{{this.light_score}}</td>
         <td>
             <form method="get">
-                <input type="hidden", name = "id", id = "id", value="{{this.video_id}}">
+                <input type="hidden", name = "id", id = "id", value="{{this.comment_id}}">
                 <input type="submit", name = "deleteSubmit", , id = "deleteSubmit", value="DELETE">
             </form>
             <form method="get">
-                <input type="hidden", name = "id", id = "id", value="{{this.video_id}}">
+                <input type="hidden", name = "id", id = "id", value="{{this.comment_id}}">
                 <input type="submit", name = "editSubmit", id="editSubmit", value="EDIT">
             </form>
 

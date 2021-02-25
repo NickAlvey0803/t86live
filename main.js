@@ -186,6 +186,61 @@ app.get('/competitions/delete',function(req,res,next){
 
 
 
+// Comments
+
+
+
+app.get('/comments',function(req,res,next){
+  var context = {};
+  var params = [];
+  mysql.pool.query('SELECT * FROM comments', function(err, rows, fields){
+    if(err){
+      next(err);
+      return;
+    }
+    context.results = JSON.parse(JSON.stringify(rows));
+    res.render('comments-view', context);
+  });
+});
+
+app.get('/comments/insert',function(req,res,next){
+  var context = {};
+  mysql.pool.query("INSERT INTO comments (`uid`, `vid`, `description`, `light_score`) VALUES (?,?,?,?)", 
+    [req.query.uid, req.query.vid, req.query.description, req.light_score], function(err, result){
+    if(err){
+      next(err);
+      return;
+    }
+    mysql.pool.query('SELECT * FROM comments', function(err, rows, fields){
+      if(err){
+        next(err);
+        return;
+      }
+      context.results = JSON.parse(JSON.stringify(rows));
+      res.render('comments-view', context);
+    });
+  });
+});
+
+app.get('/comments/delete',function(req,res,next){
+  var context = {};
+  mysql.pool.query("DELETE FROM comments WHERE id=?", [req.query.id], function(err, result){
+    if(err){
+      next(err);
+      return;
+    }
+    mysql.pool.query('SELECT * FROM comments', function(err, rows, fields){
+      if(err){
+        next(err);
+        return;
+      }
+      context.results = JSON.parse(JSON.stringify(rows));
+      res.render('comments-view', context);
+    });
+  });
+});
+
+
 ///simple-update?id=2&name=The+Task&done=false&due=2015-12-5
 // app.get('/simple-update',function(req,res,next){
 //   var context = {};
