@@ -93,7 +93,7 @@ app.get('/videos',function(req,res,next){
 
 app.get('/videos/insert',function(req,res,next){
   var context = {};
-  mysql.pool.query("INSERT INTO videos (`category`, `weight`, `uploader_weight`, `light_score`, `uid`) VALUES (?,?,?,?,(SELECT uid FROM users WHERE username = ?))", 
+  mysql.pool.query("INSERT INTO videos (`category`, `weight`, `uploader_weight`, `light_score`, `uid`) VALUES (?,?,?,?,(SELECT user_id FROM users WHERE username = ?))", 
     [req.query.category, req.query.weight, req.query.uploader_weight, req.query.light_score, req.query.uid], function(err, result){
     if(err){
       next(err);
