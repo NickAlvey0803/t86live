@@ -6,7 +6,7 @@ function bindButtons(){
       var req = new XMLHttpRequest();
       var payload = {uid:null, title:null, video_description:null, category:null, weight:null, uploader_weight:null, light_score:null};
       payload.uid = document.getElementById('uid').value;
-      payload.title = document.getElementById('title').value:
+      payload.title = document.getElementById('title').value;
       payload.video_description = document.getElementByID('video_description').value
       payload.category = document.getElementById('category').value;
       payload.weight = document.getElementById('weight').value;
