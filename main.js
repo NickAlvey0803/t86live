@@ -93,7 +93,7 @@ app.get('/videos',function(req,res,next){
 
 app.get('/videos/insert',function(req,res,next){
   var context = {};
-  mysql.pool.query("INSERT INTO videos (`uid`, `title`, `video_description`, `category`, `weight`, `uploader_weight`, `light_score`) VALUES (SELECT user_id FROM users WHERE username = ?,?,?,?,?,?,?)", 
+  mysql.pool.query("INSERT INTO videos (`uid`, `title`, `video_description`, `category`, `weight`, `uploader_weight`, `light_score`) VALUES ((SELECT user_id FROM users WHERE username = ?),?,?,?,?,?,?)", 
     [req.query.uid, req.query.title, req.query.video_description, req.query.category, req.query.weight, req.query.uploader_weight, req.query.light_score], function(err, result){
     if(err){
       next(err);
@@ -205,7 +205,7 @@ app.get('/comments',function(req,res,next){
 
 app.get('/comments/insert',function(req,res,next){
   var context = {};
-  mysql.pool.query("INSERT INTO comments (`uid`, `vid`, `description`, `light_score`) VALUES (SELECT user_id FROM users WHERE username = ?,SELECT video_id FROM videos WHERE title = ?,?,?)", 
+  mysql.pool.query("INSERT INTO comments (`uid`, `vid`, `description`, `light_score`) VALUES ((SELECT user_id FROM users WHERE username = ?),(SELECT video_id FROM videos WHERE title = ?),?,?)", 
     [req.query.uid, req.query.vid, req.query.description, req.light_score], function(err, result){
     if(err){
       next(err);
@@ -261,7 +261,7 @@ app.get('/videos_competitions',function(req,res,next){
 
 app.get('/videos_competitions/insert',function(req,res,next){
   var context = {};
-  mysql.pool.query("INSERT INTO videos_competitions (`vid`, `cid`) VALUES (SELECT video_id FROM videos WHERE title = ?,SELECT competition_id FROM competitions WHERE competition_name = ?)", 
+  mysql.pool.query("INSERT INTO videos_competitions (`vid`, `cid`) VALUES ((SELECT video_id FROM videos WHERE title = ?),(SELECT competition_id FROM competitions WHERE competition_name = ?)", 
     [req.query.vid, req.query.cid], function(err, result){
     if(err){
       next(err);
