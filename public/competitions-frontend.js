@@ -11,10 +11,10 @@ function bindButtons(){
       payload.lift_reps = document.getElementById('lift_reps').value;
 
       
-      console.log('http://flip3.engr.oregonstate.edu:52112/competitions/insert?competition_name=' + payload.competition_name + '&lift_type=' 
+      console.log('http://flip3.engr.oregonstate.edu:52113/competitions/insert?competition_name=' + payload.competition_name + '&lift_type=' 
         + payload.lift_type + '&weight_class='+ payload.weight_class + '&lift_reps=' + payload.lift_reps);
 
-      req.open('GET', 'http://flip3.engr.oregonstate.edu:52112/competitions/insert?competition_name=' + payload.competition_name + '&lift_type=' 
+      req.open('GET', 'http://flip3.engr.oregonstate.edu:52113/competitions/insert?competition_name=' + payload.competition_name + '&lift_type=' 
         + lift_type + '&weight_class='+ payload.weight_class + '&lift_reps=' + payload.lift_reps);
       
 
@@ -39,7 +39,7 @@ function bindButtons2(){
         var payload = {id:null};
         payload.id = getElementById("id").value;
 
-        req.open('GET', 'http://localhost:3000/delete?id=' + payload.id, true);
+        req.open('GET', 'http://flip3.engr.oregonstate.edu:52113/competitions/delete?id=' + payload.id, true);
 
         req.setRequestHeader('Content-Type', 'application/json');
 

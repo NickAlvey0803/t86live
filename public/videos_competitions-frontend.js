@@ -9,10 +9,10 @@ function bindButtons(){
       payload.cid = document.getElementById('cid').value;
 
       
-      console.log('http://flip3.engr.oregonstate.edu:52112/videos_competitions/insert?vid=' + payload.vid + '&cid=' 
+      console.log('http://flip3.engr.oregonstate.edu:52113/videos_competitions/insert?vid=' + payload.vid + '&cid=' 
         + payload.cid);
 
-      req.open('GET', 'http://flip3.engr.oregonstate.edu:52112/videos_competitions/insert?vid=' + payload.vid + '&cid=' 
+      req.open('GET', 'http://flip3.engr.oregonstate.edu:52113/videos_competitions/insert?vid=' + payload.vid + '&cid=' 
         + cid);
       
 
