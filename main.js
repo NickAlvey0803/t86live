@@ -94,7 +94,7 @@ app.get('/videos',function(req,res,next){
 app.get('/videos/insert',function(req,res,next){
   var context = {};
   mysql.pool.query("INSERT INTO videos (`category`, `weight`, `uploader_weight`, `light_score`, `uid`) VALUES (?,?,?,?,?)", 
-    [req.query.category, req.query.weight, req.query.uploader_weight, req.query.light_score, req.query.uid], function(err, result){
+    [req.query.category, req.query.weight, req.query.uploader_weight, req.query.light_score, (SELECT uid FROM users WHERE username = req.query.uid)], function(err, result){
     if(err){
       next(err);
       return;
@@ -313,29 +313,29 @@ app.get('/videos_competitions/delete',function(req,res,next){
 //   });
 // });
 
-// ///safe-update?id=1&name=The+Task&done=false
-// app.get('/safe-update',function(req,res,next){
-//   var context = {};
-//   mysql.pool.query("SELECT * FROM workouts WHERE id=?", [req.query.id], function(err, result){
-//     if(err){
-//       next(err);
-//       return;
-//     }
-//     if(result.length == 1){
-//       var curVals = result[0];
-//       mysql.pool.query("UPDATE workouts SET name=?, done=?, due=? WHERE id=? ",
-//         [req.query.name || curVals.name, req.query.done || curVals.done, req.query.due || curVals.due, req.query.id],
-//         function(err, result){
-//         if(err){
-//           next(err);
-//           return;
-//         }
-//         context.results = JSON.parse(JSON.stringify(rows));
-//         res.render('users-view',context);
-//       });
-//     }
-//   });
-// });
+///safe-update?id=1&name=The+Task&done=false
+app.get('/safe-update',function(req,res,next){
+  var context = {};
+  mysql.pool.query("SELECT * FROM users WHERE id=?", [req.query.id], function(err, result){
+    if(err){
+      next(err);
+      return;
+    }
+    if(result.length == 1){
+      var curVals = result[0];
+      mysql.pool.query("UPDATE workouts SET name=?, done=?, due=? WHERE id=? ",
+        [req.query.name || curVals.name, req.query.done || curVals.done, req.query.due || curVals.due, req.query.id],
+        function(err, result){
+        if(err){
+          next(err);
+          return;
+        }
+        context.results = JSON.parse(JSON.stringify(rows));
+        res.render('users-view',context);
+      });
+    }
+  });
+});
 
 // app.get('/users/reset-table',function(req,res,next){
 //   var context = {};
