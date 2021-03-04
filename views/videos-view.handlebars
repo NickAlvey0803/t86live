@@ -46,9 +46,21 @@
     <input type="text" name="uploader_weight" id="uploader_weight">
     <label for="light_score">Enter Your Initial Score (this will be updated by comments; enter TRUE for passing, FALSE for not passing): </label>
     <input type="text" name="light_score" id="light_score">
-    <input type="submit" id="videoSubmit">
+    <input type="submit" id="videoSubmit", value = "INPUT USER">
   </fieldset>
 </form>
+
+
+<form>
+  <fieldset>
+    <legend>Delete a Video</legend>
+    <label for="video_id">Enter the Title of the Video to Delete: </label>
+    <input type="text" name=""video_id" id= "video_id">
+    <input type="submit" id = "deleteSubmit" value="DELETE">
+  </fieldset>
+</form>
+
+
 
 <table class= "bodydiv">
 
@@ -60,7 +72,6 @@
         <th>Weight Lifted</th>
         <th>Uploader Weight</th>
         <th>Light Score (0 Passing, 1 Not Passing)</th>
-        <th>Edit/Delete</th>
     </tr>
 
     {{#each results}}
