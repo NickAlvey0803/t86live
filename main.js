@@ -93,8 +93,8 @@ app.get('/videos',function(req,res,next){
 
 app.get('/videos/insert',function(req,res,next){
   var context = {};
-  mysql.pool.query("INSERT INTO videos (`uid`, `title`, `video_description`, `category`, `weight`, `uploader_weight`, `light_score`) VALUES ((SELECT user_id FROM users WHERE username = ?),?,?,?,?,?,?)", 
-    [req.query.uid, req.query.title, req.query.video_description, req.query.category, req.query.weight, req.query.uploader_weight, req.query.light_score], function(err, result){
+  mysql.pool.query("INSERT INTO videos (`uid`, `title`, `video_description`, `category`, `weight`, `uploader_weight`, `light_score`) VALUES ((SELECT user_id AS uid FROM users WHERE username = req.query.uid),?,?,?,?,?,?)", 
+    [req.query.title, req.query.video_description, req.query.category, req.query.weight, req.query.uploader_weight, req.query.light_score], function(err, result){
     if(err){
       next(err);
       return;
@@ -205,7 +205,7 @@ app.get('/comments',function(req,res,next){
 
 app.get('/comments/insert',function(req,res,next){
   var context = {};
-  mysql.pool.query("INSERT INTO comments (`uid`, `vid`, `description`, `light_score`) VALUES ((SELECT user_id FROM users WHERE username = ?),(SELECT video_id FROM videos WHERE title = ?),?,?)", 
+  mysql.pool.query("INSERT INTO comments (`uid`, `vid`, `description`, `light_score`) VALUES ((SELECT user_id AS uid FROM users WHERE username = ?),(SELECT video_id AS vid FROM videos WHERE title = ?),?,?)", 
     [req.query.uid, req.query.vid, req.query.description, req.light_score], function(err, result){
     if(err){
       next(err);

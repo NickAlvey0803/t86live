@@ -158,7 +158,7 @@ CREATE TABLE `videos` (
 
 LOCK TABLES `videos` WRITE;
 /*!40000 ALTER TABLE `videos` DISABLE KEYS */;
-INSERT INTO `videos` VALUES (1,1,'first bench','here goes!','Bench',290,135,FALSE),(2,1,'first squat','here goes!','Squat',360,360,TRUE),(3,2,'first deadlift','here goes!','Deadlift',500,180,FALSE),(4,3,'second bench','here goes!','Bench',2135,135,TRUE),(5,4,'first time','here goes!','Deadlift',100,400,TRUE);
+INSERT INTO `videos` VALUES (1,1,'firstbench','here goes!','Bench',290,135,FALSE),(2,1,'firstsquat','here goes!','Squat',360,360,TRUE),(3,2,'firstdeadlift','here goes!','Deadlift',500,180,FALSE),(4,3,'secondbench','here goes!','Bench',2135,135,TRUE),(5,4,'firsttime','here goes!','Deadlift',100,400,TRUE);
 /*!40000 ALTER TABLE `videos` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
