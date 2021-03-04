@@ -41,7 +41,7 @@ function bindButtons2(){
      document.getElementById('deleteSubmit').addEventListener('click', function(event){
         var req = new XMLHttpRequest();
         var payload = {video_id:null};
-        payload.video_id = getElementById("video_id").value;
+        payload.video_id = document.getElementById("video_id").value;
         console.log(payload.video_id)
 
         req.open('GET', 'http://flip3.engr.oregonstate.edu:52113/videos/delete?title=' + payload.video_id, true);
