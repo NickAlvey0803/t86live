@@ -37,10 +37,10 @@ function bindButtons(){
 function bindButtons2(){
      document.getElementById('deleteSubmit').addEventListener('click', function(event){
         var req = new XMLHttpRequest();
-        var payload = {id:null};
-        payload.id = getElementById("id").value;
+        var payload = {video_id:null};
+        payload.video_id = getElementById("video_id").value;
 
-        req.open('GET', 'http://flip3.engr.oregonstate.edu:52113/videos/delete?id=' + payload.id, true);
+        req.open('GET', 'http://flip3.engr.oregonstate.edu:52113/videos/delete?video_id=' + payload.video_id, true);
 
         req.setRequestHeader('Content-Type', 'application/json');
 
