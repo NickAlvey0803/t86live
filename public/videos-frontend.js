@@ -4,19 +4,22 @@ document.addEventListener('DOMContentLoaded', bindButtons2)
 function bindButtons(){
   document.getElementById('videoSubmit').addEventListener('click', function(event){
       var req = new XMLHttpRequest();
-      var payload = {category:null, weight:null, uploader_weight:null, light_score:null, uid:null};
+      var payload = {uid:null, title:null, video_description:null, category:null, weight:null, uploader_weight:null, light_score:null};
+      payload.uid = document.getElementById('uid').value;
+      payload.title = document.getElementById('title').value:
+      payload.video_description = document.getElementByID('video_description').value
       payload.category = document.getElementById('category').value;
       payload.weight = document.getElementById('weight').value;
       payload.uploader_weight = document.getElementById('uploader_weight').value;
       payload.light_score = document.getElementById('light_score').value;
-      payload.uid = document.getElementById('uid').value;
+      
 
       
-      console.log('http://flip3.engr.oregonstate.edu:52113/videos/insert?category=' + payload.category + '&weight=' 
-        + payload.weight + '&uploader_weight='+ payload.uploader_weight + '&light_score=' + payload.light_score + '&uid=' + payload.uid);
+      console.log('http://flip3.engr.oregonstate.edu:52113/videos/insert?uid=' + payload.uid + '&title=' + payload.title + 'video_description=' + payload.video_description + 'category=' + payload.category + '&weight=' 
+        + payload.weight + '&uploader_weight='+ payload.uploader_weight + '&light_score=' + payload.light_score);
 
-      req.open('GET', 'http://flip3.engr.oregonstate.edu:52113/videos/insert?category=' + payload.category + '&weight=' 
-        + payload.weight + '&uploader_weight='+ payload.uploader_weight + '&light_score=' + payload.light_score + '&uid=' + payload.uid);
+      req.open('GET', 'http://flip3.engr.oregonstate.edu:52113/videos/insert?uid=' + payload.uid + '&title=' + payload.title + 'video_description=' + payload.video_description + 'category=' + payload.category + '&weight=' 
+        + payload.weight + '&uploader_weight='+ payload.uploader_weight + '&light_score=' + payload.light_score);
       
 
 
