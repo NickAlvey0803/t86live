@@ -205,7 +205,7 @@ app.get('/comments',function(req,res,next){
 
 app.get('/comments/insert',function(req,res,next){
   var context = {};
-  mysql.pool.query("INSERT INTO comments (`uid`, `vid`, `description`, `light_score`) VALUES (?,?,?,?)", 
+  mysql.pool.query("INSERT INTO comments (`uid`, `vid`, `description`, `light_score`) VALUES ((SELECT user_id FROM users WHERE username = ?),(SELECT video_id FROM videos WHERE title = ?),?,?)", 
     [req.query.uid, req.query.vid, req.query.description, req.light_score], function(err, result){
     if(err){
       next(err);
@@ -261,7 +261,7 @@ app.get('/videos_competitions',function(req,res,next){
 
 app.get('/videos_competitions/insert',function(req,res,next){
   var context = {};
-  mysql.pool.query("INSERT INTO videos_competitions (`vid`, `cid`) VALUES (?,?)", 
+  mysql.pool.query("INSERT INTO videos_competitions (`vid`, `cid`) VALUES ((SELECT video_id FROM videos WHERE title = ?),(SELECT competition_id FROM competitions WHERE competition_name = ?))", 
     [req.query.vid, req.query.cid], function(err, result){
     if(err){
       next(err);
