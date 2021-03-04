@@ -55,6 +55,6 @@ function bindButtons2(){
             console.log("Error in network request: " + req.statusText);
           }});
         req.send(null);
-    //event.preventDefault();
+    event.preventDefault();
   });
 }
