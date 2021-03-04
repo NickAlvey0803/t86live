@@ -17,6 +17,7 @@
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
+USE cs340_alveyn;
 --
 -- Table structure for table `competitions`
 --
@@ -30,7 +31,8 @@ CREATE TABLE `competitions` (
   `lift_type` varchar(255) NOT NULL,
   `weight_class` int(11) NOT NULL,
   `lift_reps` int(11) NOT NULL,
-  PRIMARY KEY (`competition_id`)
+  PRIMARY KEY (`competition_id`),
+  UNIQUE KEY `competition_name` (`competition_name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -145,6 +147,7 @@ CREATE TABLE `videos` (
   `uploader_weight` int(11) NOT NULL,
   `light_score` BOOLEAN DEFAULT FALSE,
   PRIMARY KEY (`video_id`),
+  UNIQUE KEY `title` (`title`),
   CONSTRAINT `videos_ibfk_1` FOREIGN KEY (`uid`) REFERENCES `users` (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -155,7 +158,7 @@ CREATE TABLE `videos` (
 
 LOCK TABLES `videos` WRITE;
 /*!40000 ALTER TABLE `videos` DISABLE KEYS */;
-INSERT INTO `videos` VALUES (1,1,'first time!','here goes!','Bench',290,135,FALSE),(2,1,'first time!','here goes!','Squat',360,360,TRUE),(3,2,'first time!','here goes!','Deadlift',500,180,FALSE),(4,3,'first time!','here goes!','Bench',2135,135,TRUE),(5,4,'first time!','here goes!','Deadlift',100,400,TRUE);
+INSERT INTO `videos` VALUES (1,1,'first bench','here goes!','Bench',290,135,FALSE),(2,1,'first squat','here goes!','Squat',360,360,TRUE),(3,2,'first deadlift','here goes!','Deadlift',500,180,FALSE),(4,3,'second bench','here goes!','Bench',2135,135,TRUE),(5,4,'first time','here goes!','Deadlift',100,400,TRUE);
 /*!40000 ALTER TABLE `videos` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;

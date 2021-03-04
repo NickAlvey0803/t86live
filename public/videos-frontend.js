@@ -15,10 +15,10 @@ function bindButtons(){
       
 
       
-      console.log('http://flip3.engr.oregonstate.edu:52113/videos/insert?uid=' + payload.uid + '&title=' + payload.title + 'video_description=' + payload.video_description + 'category=' + payload.category + '&weight=' 
+      console.log('http://flip3.engr.oregonstate.edu:52113/videos/insert?uid=' + payload.uid + '&title=' + payload.title + '&video_description=' + payload.video_description + '&category=' + payload.category + '&weight=' 
         + payload.weight + '&uploader_weight='+ payload.uploader_weight + '&light_score=' + payload.light_score);
 
-      req.open('GET', 'http://flip3.engr.oregonstate.edu:52113/videos/insert?uid=' + payload.uid + '&title=' + payload.title + 'video_description=' + payload.video_description + 'category=' + payload.category + '&weight=' 
+      req.open('GET', 'http://flip3.engr.oregonstate.edu:52113/videos/insert?uid=' + payload.uid + '&title=' + payload.title + '&video_description=' + payload.video_description + '&category=' + payload.category + '&weight=' 
         + payload.weight + '&uploader_weight='+ payload.uploader_weight + '&light_score=' + payload.light_score);
       
 
