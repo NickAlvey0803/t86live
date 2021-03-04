@@ -40,7 +40,7 @@ function bindButtons2(){
         var payload = {id:null};
         payload.id = getElementById("id").value;
 
-        req.open('GET', 'http://localhost:3000/delete?id=' + payload.id, true);
+        req.open('GET', 'http://flip3.engr.oregonstate.edu:52113/videos/delete?id=' + payload.id, true);
 
         req.setRequestHeader('Content-Type', 'application/json');
 

@@ -15,7 +15,7 @@ function bindButtons(){
         + payload.lift_type + '&weight_class='+ payload.weight_class + '&lift_reps=' + payload.lift_reps);
 
       req.open('GET', 'http://flip3.engr.oregonstate.edu:52113/competitions/insert?competition_name=' + payload.competition_name + '&lift_type=' 
-        + lift_type + '&weight_class='+ payload.weight_class + '&lift_reps=' + payload.lift_reps);
+        + payload.lift_type + '&weight_class='+ payload.weight_class + '&lift_reps=' + payload.lift_reps);
       
 
 

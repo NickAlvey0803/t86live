@@ -93,8 +93,8 @@ app.get('/videos',function(req,res,next){
 
 app.get('/videos/insert',function(req,res,next){
   var context = {};
-  mysql.pool.query("INSERT INTO videos (`category`, `weight`, `uploader_weight`, `light_score`, `uid`) VALUES (?,?,?,?,(SELECT user_id FROM users WHERE username = ?))", 
-    [req.query.category, req.query.weight, req.query.uploader_weight, req.query.light_score, req.query.uid], function(err, result){
+  mysql.pool.query("INSERT INTO videos (`uid`, `title`, `video_description`, `category`, `weight`, `uploader_weight`, `light_score`) VALUES ((SELECT user_id FROM users WHERE username = ?),?,?,?,?,?,?)", 
+    [req.query.uid, req.query.title, req.query.video_description, req.query.category, req.query.weight, req.query.uploader_weight, req.query.light_score], function(err, result){
     if(err){
       next(err);
       return;
@@ -112,7 +112,7 @@ app.get('/videos/insert',function(req,res,next){
 
 app.get('/videos/delete',function(req,res,next){
   var context = {};
-  mysql.pool.query("DELETE FROM videos WHERE id=?", [req.query.id], function(err, result){
+  mysql.pool.query("DELETE FROM videos WHERE video_id=?", [req.query.id], function(err, result){
     if(err){
       next(err);
       return;

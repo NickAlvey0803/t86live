@@ -32,6 +32,12 @@
 <form>
   <fieldset>
     <legend>Upload Some Information About Your Video</legend>
+    <label for="uid">Enter your Username: </label>
+    <input type="text" name="uid" id="uid">
+    <label for="title">What is the Title of Your Video?: </label>
+    <input type="text" name="title" id="title">
+    <label for="video_description">Describe Your Video: </label>
+    <input type="text" name="video_description" id="video_description">
     <label for="category">Category (Type of Lift): </label>
     <input type="text" name="category" id="category">
     <label for="weight">How Much Did You Lift?: </label>
@@ -66,11 +72,11 @@
         <td>{{this.light_score}}</td>
         <td>
             <form method="get">
-                <input type="hidden", name = "id", id = "id", value="{{this.video_id}}">
+                <input type="hidden", name = "video_id", id = "video_id", value="{{this.video_id}}">
                 <input type="submit", name = "deleteSubmit", , id = "deleteSubmit", value="DELETE">
             </form>
             <form method="get">
-                <input type="hidden", name = "id", id = "id", value="{{this.video_id}}">
+                <input type="hidden", name = "video_id", id = "video_id, value="{{this.video_id}}">
                 <input type="submit", name = "editSubmit", id="editSubmit", value="EDIT">
             </form>
 
