@@ -56,7 +56,7 @@ app.get('/users/insert',function(req,res,next){
 
 app.get('/users/delete',function(req,res,next){
   var context = {};
-  mysql.pool.query("DELETE FROM users WHERE id=?", [req.query.id], function(err, result){
+  mysql.pool.query("DELETE FROM users WHERE user_id=?", [req.query.id], function(err, result){
     if(err){
       next(err);
       return;

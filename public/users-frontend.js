@@ -6,16 +6,16 @@ function bindButtons(){
       var req = new XMLHttpRequest();
       var payload = {username:null, weight:null, description:null, user_score:null};
       payload.username = document.getElementById('username').value;
-      payload.weight = document.getElementById('weight').value;
-      payload.uploader_weight = document.getElementById('uploader_weight').value;
+      payload.password = document.getElementById('password').value;
+      payload.description = document.getElementById('description').value;
       payload.user_score = document.getElementById('user_score').value;
 
       
-      console.log('http://flip3.engr.oregonstate.edu:52113/users/insert?username=' + payload.username + '&weight=' 
-        + payload.weight + '&uploader_weight='+ payload.uploader_weight + '&user_score=' + payload.user_score);
+      console.log('http://flip3.engr.oregonstate.edu:52113/users/insert?username=' + payload.username + '&password=' 
+        + payload.password + '&description='+ payload.description + '&user_score=' + payload.user_score);
 
-      req.open('GET', 'http://flip3.engr.oregonstate.edu:52113/users/insert?username=' + payload.username + '&weight=' 
-        + payload.weight + '&uploader_weight='+ payload.uploader_weight + '&user_score=' + payload.user_score);
+      req.open('GET', 'http://flip3.engr.oregonstate.edu:52113/users/insert?username=' + payload.username + '&password=' 
+        + payload.password + '&description='+ payload.description + '&user_score=' + payload.user_score);
       
 
 
@@ -36,10 +36,10 @@ function bindButtons(){
 function bindButtons2(){
      document.getElementById('deleteSubmit').addEventListener('click', function(event){
         var req = new XMLHttpRequest();
-        var payload = {id:null};
-        payload.id = getElementById("id").value;
+        var payload = {user_id:null};
+        payload.user_id = getElementById("user_id").value;
 
-        req.open('GET', 'http://localhost:3000/delete?id=' + payload.id, true);
+        req.open('GET', 'http://flip3.engr.oregonstate.edu:52113/users/delete?user_id=' + payload.user_id, true);
 
         req.setRequestHeader('Content-Type', 'application/json');
 
