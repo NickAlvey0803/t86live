@@ -13,7 +13,7 @@ app.engine('handlebars', handlebars.engine);
 var session = require('express-session');
 var bodyParser = require('body-parser');
 app.set('view engine', 'handlebars');
-app.set('port', 52113);
+app.set('port', 18954);
 
 
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -37,7 +37,7 @@ app.get('/users',function(req,res,next){
 
 app.get('/users/insert',function(req,res,next){
   var context = {};
-  mysql.pool.query("INSERT INTO users (`username`, `password`, `description`, `user_score`) VALUES (?,?,?,?)", 
+  mysql.pool.query("INSERT INTO users (`username`, `password`, `description`, `user_score`) VALUES (?,?,?,?);", 
     [req.query.username, req.query.password, req.query.description, req.query.user_score], function(err, result){
     if(err){
       next(err);
@@ -49,9 +49,11 @@ app.get('/users/insert',function(req,res,next){
         return;
       }
       context.results = JSON.parse(JSON.stringify(rows));
-      res.render('users-view', context);
+      //res.render('users-view', context);
+      res.redirect('/users');
     });
   });
+  console.log("Insert user request attempted");
 });
 
 app.get('/users/delete',function(req,res,next){
@@ -93,8 +95,8 @@ app.get('/videos',function(req,res,next){
 
 app.get('/videos/insert',function(req,res,next){
   var context = {};
-  mysql.pool.query("INSERT INTO videos (`uid`, `title`, `video_description`, `category`, `weight`, `uploader_weight`, `light_score`) VALUES (?,?,?,?,?,?,?)", 
-    [req.query.title, req.query.video_description, req.query.category, req.query.weight, req.query.uploader_weight, req.query.light_score], function(err, result){
+  mysql.pool.query("INSERT INTO videos (`uid`, `title`, `video_description`, `category`, `weight`, `uploader_weight`, `light_score`) VALUES (?,?,?,?,?,?,?);", 
+    [req.query.uid, req.query.title, req.query.video_description, req.query.category, req.query.weight, req.query.uploader_weight, req.query.light_score], function(err, result){
     if(err){
       next(err);
       return;
@@ -105,9 +107,11 @@ app.get('/videos/insert',function(req,res,next){
         return;
       }
       context.results = JSON.parse(JSON.stringify(rows));
-      res.render('videos-view', context);
+      //res.render('videos-view', context);
+      res.redirect('/videos');
     });
   });
+  console.log("Insert video request attempted");
 });
 
 app.get('/videos/delete',function(req,res,next){
@@ -149,7 +153,7 @@ app.get('/competitions',function(req,res,next){
 
 app.get('/competitions/insert',function(req,res,next){
   var context = {};
-  mysql.pool.query("INSERT INTO competitions (`competition_name`, `lift_type`, `weight_class`, `lift_reps`) VALUES (?,?,?,?)", 
+  mysql.pool.query("INSERT INTO competitions (`competition_name`, `lift_type`, `weight_class`, `lift_reps`) VALUES (?,?,?,?);", 
     [req.query.competition_name, req.query.lift_type, req.query.weight_class, req.query.lift_reps], function(err, result){
     if(err){
       next(err);
@@ -161,7 +165,8 @@ app.get('/competitions/insert',function(req,res,next){
         return;
       }
       context.results = JSON.parse(JSON.stringify(rows));
-      res.render('competitions-view', context);
+      //res.render('competitions-view', context);
+      res.redirect("/competitions");
     });
   });
 });
@@ -205,7 +210,7 @@ app.get('/comments',function(req,res,next){
 
 app.get('/comments/insert',function(req,res,next){
   var context = {};
-  mysql.pool.query("INSERT INTO comments (`uid`, `vid`, `description`, `light_score`) VALUES ((SELECT user_id AS uid FROM users WHERE username = ?),(SELECT video_id AS vid FROM videos WHERE title = ?),?,?)", 
+  mysql.pool.query("INSERT INTO comments (`uid`, `vid`, `description`, `light_score`) VALUES ((SELECT user_id AS uid FROM users WHERE username = ?),(SELECT video_id AS vid FROM videos WHERE title = ?),?,?);", 
     [req.query.uid, req.query.vid, req.query.description, req.light_score], function(err, result){
     if(err){
       next(err);
@@ -217,7 +222,8 @@ app.get('/comments/insert',function(req,res,next){
         return;
       }
       context.results = JSON.parse(JSON.stringify(rows));
-      res.render('comments-view', context);
+      //res.render('comments-view', context);
+      res.redirect('/comments');
     });
   });
 });
@@ -273,7 +279,8 @@ app.get('/videos_competitions/insert',function(req,res,next){
         return;
       }
       context.results = JSON.parse(JSON.stringify(rows));
-      res.render('videos_competitions-view', context);
+//      res.render('videos_competitions-view', context);
+	res.redirect("/videos_competitions");
     });
   });
 });
