@@ -267,7 +267,7 @@ app.get('/videos_competitions',function(req,res,next){
 
 app.get('/videos_competitions/insert',function(req,res,next){
   var context = {};
-  mysql.pool.query("INSERT INTO videos_competitions (`vid`, `cid`) VALUES ((SELECT video_id FROM videos WHERE title = ?),(SELECT competition_id FROM competitions WHERE competition_name = ?)", 
+  mysql.pool.query("INSERT INTO videos_competitions (`vid`, `cid`) VALUES ((SELECT video_id FROM videos WHERE title = ?),(SELECT competition_id FROM competitions WHERE competition_name = ?))", 
     [req.query.vid, req.query.cid], function(err, result){
     if(err){
       next(err);
