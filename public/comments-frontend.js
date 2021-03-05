@@ -1,5 +1,6 @@
 document.addEventListener('DOMContentLoaded', bindButtons)
 document.addEventListener('DOMContentLoaded', bindButtons2)
+document.addEventListener('DOMContentLoaded', bindButtons3)
 
 function bindButtons(){
   document.getElementById('commentSubmit').addEventListener('click', function(event){
@@ -35,6 +36,27 @@ function bindButtons(){
 // if(document.getElementById('deleteSubmit') !== null){
 function bindButtons2(){
      document.getElementById('deleteSubmit').addEventListener('click', function(event){
+        var req = new XMLHttpRequest();
+        var payload = {id:null};
+        payload.id = getElementById("id").value;
+
+        req.open('GET', 'http://localhost:3000/delete?id=' + payload.id, true);
+
+        req.setRequestHeader('Content-Type', 'application/json');
+
+        req.addEventListener('load',function(){
+          if(req.status >= 200 && req.status < 400){
+            
+          } else {
+            console.log("Error in network request: " + req.statusText);
+          }});
+        req.send(null);
+    //event.preventDefault();
+  });
+}
+
+function bindButtons3(){
+     document.getElementById('editSubmit').addEventListener('click', function(event){
         var req = new XMLHttpRequest();
         var payload = {id:null};
         payload.id = getElementById("id").value;

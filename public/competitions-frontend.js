@@ -1,5 +1,6 @@
 document.addEventListener('DOMContentLoaded', bindButtons)
 document.addEventListener('DOMContentLoaded', bindButtons2)
+document.addEventListener('DOMContentLoaded', bindButtons3)
 
 function bindButtons(){
   document.getElementById('competitionSubmit').addEventListener('click', function(event){
@@ -40,6 +41,27 @@ function bindButtons2(){
         payload.competition_id = getElementById("competition_id").value;
 
         req.open('GET', 'http://flip3.engr.oregonstate.edu:52113/competitions/delete?competition_name=' + payload.competition_id, true);
+
+        req.setRequestHeader('Content-Type', 'application/json');
+
+        req.addEventListener('load',function(){
+          if(req.status >= 200 && req.status < 400){
+            
+          } else {
+            console.log("Error in network request: " + req.statusText);
+          }});
+        req.send(null);
+    //event.preventDefault();
+  });
+}
+
+function bindButtons3(){
+     document.getElementById('editSubmit').addEventListener('click', function(event){
+        var req = new XMLHttpRequest();
+        var payload = {competition_id:null};
+        payload.competition_id = getElementById("competition_id_edit").value;
+
+        req.open('GET', 'http://flip3.engr.oregonstate.edu:52113/competitions/edit' + payload.competition_id, true);
 
         req.setRequestHeader('Content-Type', 'application/json');
 

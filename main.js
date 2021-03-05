@@ -169,8 +169,11 @@ app.get('/competitions/insert',function(req,res,next){
       context.results = JSON.parse(JSON.stringify(rows));
       //res.render('competitions-view', context);
       res.redirect("/competitions");
+
     });
+
   });
+  console.log("Insert competitions request attempted");
 });
 
 app.get('/competitions/delete',function(req,res,next){
@@ -229,6 +232,7 @@ app.get('/comments/insert',function(req,res,next){
       res.redirect('/comments');
     });
   });
+  console.log("Insert comments request attempted");
 });
 
 app.get('/comments/delete',function(req,res,next){
@@ -287,6 +291,7 @@ app.get('/videos_competitions/insert',function(req,res,next){
 	res.redirect("/videos_competitions");
     });
   });
+  console.log("Insert videos_competitions request attempted");
 });
 
 app.get('/videos_competitions/delete',function(req,res,next){

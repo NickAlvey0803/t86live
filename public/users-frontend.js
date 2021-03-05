@@ -1,5 +1,6 @@
 document.addEventListener('DOMContentLoaded', bindButtons)
 document.addEventListener('DOMContentLoaded', bindButtons2)
+document.addEventListener('DOMContentLoaded', bindButtons3)
 
 function bindButtons(){
   document.getElementById('userSubmit').addEventListener('click', function(event){
@@ -40,6 +41,28 @@ function bindButtons2(){
         payload.user_id = getElementById("user_id").value;
 
         req.open('GET', 'http://flip3.engr.oregonstate.edu:52113/users/delete?username=' + payload.user_id, true);
+
+        req.setRequestHeader('Content-Type', 'application/json');
+
+        req.addEventListener('load',function(){
+          if(req.status >= 200 && req.status < 400){
+            
+          } else {
+            console.log("Error in network request: " + req.statusText);
+          }});
+        req.send(null);
+    //event.preventDefault();
+  });
+}
+
+
+function bindButtons3(){
+     document.getElementById('editSubmit').addEventListener('click', function(event){
+        var req = new XMLHttpRequest();
+        var payload = {user_id:null};
+        payload.user_id = getElementById("user_id_edit").value;
+
+        req.open('GET', 'http://flip3.engr.oregonstate.edu:52113/users/edit' + payload.user_id, true);
 
         req.setRequestHeader('Content-Type', 'application/json');
 

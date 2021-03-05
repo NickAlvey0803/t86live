@@ -40,7 +40,7 @@
     <input type="text" name="weight_class" id="weight_class">
     <label for="lift_reps">How Many Reps Did You Do?: </label>
     <input type="text" name="lift_reps" id="lift_reps">
-    <input type="submit" id="competitionSubmit">
+    <input type="submit" id="competitionSubmit" value ="INPUT COMPETITION">
   </fieldset>
 </form>
 
@@ -49,7 +49,16 @@
     <legend>Delete a Competition</legend>
     <label for="competition_id">Enter the Name of the Competition to Delete: </label>
     <input type="text" name=""competition_id" id= "vcompetition_id">
-    <input type="submit" id = "deleteSubmit" value="DELETE">
+    <input type="submit" id = "deleteSubmit" value="DELETE COMPETITION">
+  </fieldset>
+</form>
+
+<form action="/competitions/edit" method="get">
+  <fieldset>
+    <legend>Delete a Competition</legend>
+    <label for="competition_id_edit">Enter the Name of the Competition to Edit: </label>
+    <input type="text" name=""competition_id_edit" id= "competition_id_edit">
+    <input type="submit" id = "deleteSubmit" value="EDIT COMPETITION">
   </fieldset>
 </form>
 

@@ -1,5 +1,6 @@
 document.addEventListener('DOMContentLoaded', bindButtons)
 document.addEventListener('DOMContentLoaded', bindButtons2)
+document.addEventListener('DOMContentLoaded', bindButtons3)
 
 function bindButtons(){
   document.getElementById('videoSubmit').addEventListener('click', function(event){
@@ -58,3 +59,26 @@ function bindButtons2(){
     // event.preventDefault();
   });
 }
+
+function bindButtons3(){
+     document.getElementById('editSubmit').addEventListener('click', function(event){
+        var req = new XMLHttpRequest();
+        var payload = {video_id:null};
+        payload.video_id = document.getElementById("video_id_edit").value;
+        console.log(payload.video_id)
+
+        req.open('GET', 'http://flip3.engr.oregonstate.edu:52113/videos/edit' + payload.video_id, true);
+
+        req.setRequestHeader('Content-Type', 'application/json');
+
+        req.addEventListener('load',function(){
+          if(req.status >= 200 && req.status < 400){
+            
+          } else {
+            console.log("Error in network request: " + req.statusText);
+          }});
+        req.send(null);
+    // event.preventDefault();
+  });
+}
+

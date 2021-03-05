@@ -46,7 +46,7 @@
     <input type="text" name="uploader_weight" id="uploader_weight">
     <label for="light_score">Enter Your Initial Score (this will be updated by comments; enter TRUE for passing, FALSE for not passing): </label>
     <input type="text" name="light_score" id="light_score">
-    <input type="submit" id="videoSubmit", value = "INPUT USER">
+    <input type="submit" id="videoSubmit", value = "INPUT VIDEO">
   </fieldset>
 </form>
 
@@ -56,7 +56,16 @@
     <legend>Delete a Video</legend>
     <label for="video_id">Enter the Title of the Video to Delete: </label>
     <input type="text" name=""video_id" id= "video_id">
-    <input type="submit" id = "deleteSubmit" value="DELETE">
+    <input type="submit" id = "deleteSubmit" value="DELETE VIDEO">
+  </fieldset>
+</form>
+
+<form action="/videos/edit" action="get">
+  <fieldset>
+    <legend>Delete a Video</legend>
+    <label for="video_id_edit">Enter the Title of the Video to Edit: </label>
+    <input type="text" name=""video_id_edit" id= "video_id_edit">
+    <input type="submit" id = "deleteSubmit" value="EDIT VIDEO">
   </fieldset>
 </form>
 

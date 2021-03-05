@@ -40,7 +40,7 @@
     <input type="text" name="description" id="description">
     <label for="user_score">What's Your Score?: </label>
     <input type="text" name="user_score" id="user_score">
-    <input type="submit" id="userSubmit">
+    <input type="submit" id="userSubmit", value = "INPUT USER">
   </fieldset>
 </form>
 
@@ -49,7 +49,16 @@
     <legend>Delete a User</legend>
     <label for="user_id">Enter the Name of the User to Delete: </label>
     <input type="text" name=""user_id" id= "vuser_id">
-    <input type="submit" id = "deleteSubmit" value="DELETE">
+    <input type="submit" id = "deleteSubmit" value="DELETE USER">
+  </fieldset>
+</form>
+
+<form action="/users/edit" method="get">
+  <fieldset>
+    <legend>Delete a User</legend>
+    <label for="user_id">Enter the Name of the User to Edit: </label>
+    <input type="text" name=""user_id" id= "vuser_id">
+    <input type="submit" id = "deleteSubmit" value="EDIT USER">
   </fieldset>
 </form>
 
