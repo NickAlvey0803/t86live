@@ -95,7 +95,7 @@ app.get('/videos',function(req,res,next){
 
 app.get('/videos/insert',function(req,res,next){
   var context = {};
-  mysql.pool.query("INSERT INTO videos (`uid`, `title`, `video_description`, `category`, `weight`, `uploader_weight`, `light_score`) VALUES (?,?,?,?,?,?,?);", 
+  mysql.pool.query("INSERT INTO videos (`uid`, `title`, `video_description`, `category`, `weight`, `uploader_weight`, `light_score`) VALUES ((SELECT user_id AS uid FROM users WHERE username = ?),?,?,?,?,?,?);", 
     [req.query.uid, req.query.title, req.query.video_description, req.query.category, req.query.weight, req.query.uploader_weight, req.query.light_score], function(err, result){
     if(err){
       next(err);
