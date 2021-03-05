@@ -50,7 +50,7 @@ app.get('/users/insert',function(req,res,next){
       }
       context.results = JSON.parse(JSON.stringify(rows));
       //res.render('users-view', context);
-      res.redirect('/users');
+      res.redirect('/users-view');
     });
   });
   console.log("Insert user request attempted");
@@ -69,7 +69,8 @@ app.get('/users/delete',function(req,res,next){
         return;
       }
       context.results = JSON.parse(JSON.stringify(rows));
-      res.render('users-view', context);
+      // res.render('users-view', context);
+      res.redirect('/users-view');
     });
   });
 });
@@ -108,7 +109,7 @@ app.get('/videos/insert',function(req,res,next){
       }
       context.results = JSON.parse(JSON.stringify(rows));
       //res.render('videos-view', context);
-      res.redirect('/videos');
+      res.redirect('/videos-view');
     });
   });
   console.log("Insert video request attempted");
@@ -127,7 +128,8 @@ app.get('/videos/delete',function(req,res,next){
         return;
       }
       context.results = JSON.parse(JSON.stringify(rows));
-      res.render('videos-view', context);
+      // res.render('videos-view', context);
+      res.redirect('/videos-view');
     });
   });
 });
@@ -166,7 +168,7 @@ app.get('/competitions/insert',function(req,res,next){
       }
       context.results = JSON.parse(JSON.stringify(rows));
       //res.render('competitions-view', context);
-      res.redirect("/competitions");
+      res.redirect("/competitions-view");
     });
   });
 });
@@ -184,7 +186,8 @@ app.get('/competitions/delete',function(req,res,next){
         return;
       }
       context.results = JSON.parse(JSON.stringify(rows));
-      res.render('competitions-view', context);
+      // res.render('competitions-view', context);
+      res.redirect('/competitions-view');
     });
   });
 });
@@ -223,7 +226,7 @@ app.get('/comments/insert',function(req,res,next){
       }
       context.results = JSON.parse(JSON.stringify(rows));
       //res.render('comments-view', context);
-      res.redirect('/comments');
+      res.redirect('/comments-view');
     });
   });
 });
@@ -241,7 +244,8 @@ app.get('/comments/delete',function(req,res,next){
         return;
       }
       context.results = JSON.parse(JSON.stringify(rows));
-      res.render('comments-view', context);
+      // res.render('comments-view', context);
+      res.redirect('/comments-view');
     });
   });
 });
@@ -280,7 +284,7 @@ app.get('/videos_competitions/insert',function(req,res,next){
       }
       context.results = JSON.parse(JSON.stringify(rows));
 //      res.render('videos_competitions-view', context);
-	res.redirect("/videos_competitions");
+	res.redirect("/videos_competitions-view");
     });
   });
 });
@@ -298,7 +302,8 @@ app.get('/videos_competitions/delete',function(req,res,next){
         return;
       }
       context.results = JSON.parse(JSON.stringify(rows));
-      res.render('videos_competitions-view', context);
+      // res.render('videos_competitions-view', context);
+      res.redirect('/videos_competitions-view');
     });
   });
 });
