@@ -39,7 +39,7 @@ function bindButtons2(){
         var payload = {user_id:null};
         payload.user_id = getElementById("user_id").value;
 
-        req.open('GET', 'http://flip3.engr.oregonstate.edu:52113/users/delete?user_id=' + payload.user_id, true);
+        req.open('GET', 'http://flip3.engr.oregonstate.edu:52113/users/delete?username=' + payload.user_id, true);
 
         req.setRequestHeader('Content-Type', 'application/json');
 

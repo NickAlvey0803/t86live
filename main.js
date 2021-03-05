@@ -58,7 +58,7 @@ app.get('/users/insert',function(req,res,next){
 
 app.get('/users/delete',function(req,res,next){
   var context = {};
-  mysql.pool.query("DELETE FROM users WHERE user_id=?", [req.query.user_id], function(err, result){
+  mysql.pool.query("DELETE FROM users WHERE username=?", [req.query.user_id], function(err, result){
     if(err){
       next(err);
       return;
@@ -173,7 +173,7 @@ app.get('/competitions/insert',function(req,res,next){
 
 app.get('/competitions/delete',function(req,res,next){
   var context = {};
-  mysql.pool.query("DELETE FROM competitions WHERE competition_id=?", [req.query.competition_id], function(err, result){
+  mysql.pool.query("DELETE FROM competitions WHERE competition_name=?", [req.query.competition_id], function(err, result){
     if(err){
       next(err);
       return;

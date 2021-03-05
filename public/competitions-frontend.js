@@ -39,7 +39,7 @@ function bindButtons2(){
         var payload = {competition_id:null};
         payload.competition_id = getElementById("competition_id").value;
 
-        req.open('GET', 'http://flip3.engr.oregonstate.edu:52113/competitions/delete?id=' + payload.competition_id, true);
+        req.open('GET', 'http://flip3.engr.oregonstate.edu:52113/competitions/delete?competition_name=' + payload.competition_id, true);
 
         req.setRequestHeader('Content-Type', 'application/json');
 
