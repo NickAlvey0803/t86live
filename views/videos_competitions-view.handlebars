@@ -45,7 +45,7 @@
 
         <th>VID</th>
         <th>CID</th>
-        <th>Edit/Delete</th>
+        
     </tr>
 
     {{#each results}}
@@ -54,17 +54,6 @@
         <td>{{this.vid}}</td>
         <td>{{this.cid}}</td>
         
-        <td>
-            <form method="get">
-                <input type="hidden", name = "id", id = "id", value="{{this.vid}}">
-                <input type="submit", name = "deleteSubmit", , id = "deleteSubmit", value="DELETE">
-            </form>
-            <form method="get">
-                <input type="hidden", name = "id", id = "id", value="{{this.vid}}">
-                <input type="submit", name = "editSubmit", id="editSubmit", value="EDIT">
-            </form>
-
-        </td>
     </tr>
     {{/each}}
    

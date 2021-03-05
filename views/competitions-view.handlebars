@@ -70,7 +70,7 @@
         <th>Lift Type</th>
         <th>Weight Class</th>
         <th>Number of Reps</th>
-        <th>Edit/Delete</th>
+       
     </tr>
 
     {{#each results}}
@@ -80,17 +80,7 @@
         <td>{{this.lift_type}}</td>
         <td>{{this.weight_class}}</td>
         <td>{{this.lift_reps}}</td>
-        <td>
-            <form method="get">
-                <input type="hidden", name = "competition_id", id = "competition_id", value="{{this.competition_id}}">
-                <input type="submit", name = "deleteSubmit", , id = "deleteSubmit", value="DELETE">
-            </form>
-            <form method="get">
-                <input type="hidden", name = "competition_id", id = "competition_id", value="{{this.competition_id}}">
-                <input type="submit", name = "editSubmit", id="editSubmit", value="EDIT">
-            </form>
-
-        </td>
+        
     </tr>
     {{/each}}
    

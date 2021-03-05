@@ -73,7 +73,7 @@
         <th>VID</th>
         <th>Comment</th>
         <th>Light Score</th>
-        <th>Edit/Delete</th>
+        
     </tr>
 
     {{#each results}}
@@ -83,17 +83,7 @@
         <td>{{this.vid}}</td>
         <td>{{this.description}}</td>
         <td>{{this.light_score}}</td>
-        <td>
-            <form method="get">
-                <input type="hidden", name = "id", id = "id", value="{{this.comment_id}}">
-                <input type="submit", name = "deleteSubmit", , id = "deleteSubmit", value="DELETE">
-            </form>
-            <form method="get">
-                <input type="hidden", name = "id", id = "id", value="{{this.comment_id}}">
-                <input type="submit", name = "editSubmit", id="editSubmit", value="EDIT">
-            </form>
-
-        </td>
+        
     </tr>
     {{/each}}
    

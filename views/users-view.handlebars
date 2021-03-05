@@ -69,7 +69,7 @@
         <th>Password</th>
         <th>Description</th>
         <th>User Score</th>
-        <th>Edit/Delete</th>
+       
     </tr>
 
     {{#each results}}
@@ -79,17 +79,7 @@
         <td>{{this.password}}</td>
         <td>{{this.description}}</td>
         <td>{{this.user_score}}</td>
-        <td>
-            <form method="get">
-                <input type="hidden", name = "user_id", id = "user_id", value="{{this.user_id}}">
-                <input type="submit", name = "deleteSubmit", , id = "deleteSubmit", value="DELETE">
-            </form>
-            <form method="get">
-                <input type="hidden", name = "user_id", id = "user_id", value="{{this.user_id}}">
-                <input type="submit", name = "editSubmit", id="editSubmit", value="EDIT">
-            </form>
-
-        </td>
+        
     </tr>
     {{/each}}
    
