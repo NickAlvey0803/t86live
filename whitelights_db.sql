@@ -58,8 +58,8 @@ CREATE TABLE `videos_competitions` (
   `cid` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`vid`,`cid`),
   KEY `cid` (`cid`),
-  CONSTRAINT `videos_competitions_ibfk_1` FOREIGN KEY (`vid`) REFERENCES `videos` (`video_id`),
-  CONSTRAINT `videos_competitions_ibfk_2` FOREIGN KEY (`vid`) REFERENCES `competitions` (`competition_id`)
+  CONSTRAINT `videos_competitions_ibfk_1` FOREIGN KEY (`vid`) REFERENCES `videos` (`video_id`) ON DELETE CASCADE,
+  CONSTRAINT `videos_competitions_ibfk_2` FOREIGN KEY (`vid`) REFERENCES `competitions` (`competition_id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -115,8 +115,8 @@ CREATE TABLE `comments` (
   `description` varchar(255) DEFAULT NULL,
   `light_score` BOOLEAN DEFAULT FALSE,
   PRIMARY KEY (`comment_id`),
-  CONSTRAINT `comments_ibfk_1` FOREIGN KEY (`uid`) REFERENCES `users` (`user_id`),
-  CONSTRAINT `comments_ibfk_2` FOREIGN KEY (`vid`) REFERENCES `videos` (`video_id`)
+  CONSTRAINT `comments_ibfk_1` FOREIGN KEY (`uid`) REFERENCES `users` (`user_id`) ON DELETE cascade,
+  CONSTRAINT `comments_ibfk_2` FOREIGN KEY (`vid`) REFERENCES `videos` (`video_id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -148,7 +148,7 @@ CREATE TABLE `videos` (
   `light_score` BOOLEAN DEFAULT FALSE,
   PRIMARY KEY (`video_id`),
   UNIQUE KEY `title` (`title`),
-  CONSTRAINT `videos_ibfk_1` FOREIGN KEY (`uid`) REFERENCES `users` (`user_id`)
+  CONSTRAINT `videos_ibfk_1` FOREIGN KEY (`uid`) REFERENCES `users` (`user_id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 

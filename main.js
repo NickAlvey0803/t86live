@@ -13,7 +13,7 @@ app.engine('handlebars', handlebars.engine);
 var session = require('express-session');
 var bodyParser = require('body-parser');
 app.set('view engine', 'handlebars');
-app.set('port', 52113);
+app.set('port', 59422);
 
 
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -58,7 +58,11 @@ app.get('/users/insert',function(req,res,next){
 
 app.get('/users/delete',function(req,res,next){
   var context = {};
-  mysql.pool.query("DELETE FROM users WHERE username=?", [req.query.user_id], function(err, result){
+  console.log("Delete user request attempted");
+  console.log(req.query.user_id);
+  mysql.pool.query("DELETE FROM users WHERE username = ?", [req.query.user_id], function(err, result){
+
+//DELETE * FROM users JOIN comments ON comments.uid = users.user_id JOIN videos ON videos.uid = users.user_id WHERE username = ?
     if(err){
       next(err);
       return;
