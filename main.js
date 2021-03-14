@@ -13,7 +13,7 @@ app.engine('handlebars', handlebars.engine);
 var session = require('express-session');
 var bodyParser = require('body-parser');
 app.set('view engine', 'handlebars');
-app.set('port', 52115);
+app.set('port', 52116);
 
 
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -111,12 +111,14 @@ app.get('/users/edit',function(req,res,next){
 app.get('/videos',function(req,res,next){
   var context = {};
   var params = [];
-  mysql.pool.query('SELECT * FROM videos', function(err, rows, fields){
+  var query_rows;
+	mysql.pool.query('SELECT title,video_description,category,weight,uploader_weight,AVG(comments.light_score) AS aveg FROM videos JOIN comments ON comments.vid = videos.video_id', function(err, rows, fields){
     if(err){
       next(err);
       return;
     }
-    context.results = JSON.parse(JSON.stringify(rows));
+    query_rows = JSON.parse(JSON.stringify(rows));
+    context.results = query_rows;
     res.render('videos-view', context);
   });
 });
@@ -294,8 +296,10 @@ app.get('/comments',function(req,res,next){
 
 app.get('/comments/insert',function(req,res,next){
   var context = {};
+  console.log("Insert comments request attempted");
+  console.log(req.query.light_score);
   mysql.pool.query("INSERT INTO comments (`uid`, `vid`, `description`, `light_score`) VALUES ((SELECT user_id AS uid FROM users WHERE username = ?),(SELECT video_id AS vid FROM videos WHERE title = ?),?,?);", 
-    [req.query.uid, req.query.vid, req.query.description, req.light_score], function(err, result){
+    [req.query.uid, req.query.vid, req.query.description, req.query.light_score], function(err, result){
     if(err){
       next(err);
       return;
@@ -310,7 +314,6 @@ app.get('/comments/insert',function(req,res,next){
       res.redirect('/comments');
     });
   });
-  console.log("Insert comments request attempted");
 });
 
 app.get('/comments/delete',function(req,res,next){

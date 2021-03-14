@@ -8,3 +8,10 @@ var pool = mysql.createPool({
 });
 
 module.exports.pool = pool;
+var poolold = {
+  connectionLimit : 10,
+  host            : 'classmysql.engr.oregonstate.edu',
+  user            : 'cs340_zimmerml',
+  password        : '9549',
+  database        : 'cs340_zimmerml'
+};
