@@ -90,8 +90,14 @@ app.get('/users/edit',function(req,res,next){
       next(err);
       return;
     }
-    context.results = JSON.parse(JSON.stringify(rows));
-    res.redirect('/users');
+    mysql.pool.query('SELECT * FROM users', function(err, rows, fields){
+      if(err){
+        next(err);
+        return;
+      }
+	    context.results = JSON.parse(JSON.stringify(rows));
+	    res.redirect('/users');
+	});
   });
 });
 
@@ -187,8 +193,14 @@ app.get('/videos/edit',function(req,res,next){
       next(err);
       return;
     }
-    context.results = JSON.parse(JSON.stringify(rows));
-    res.redirect('/videos');
+    mysql.pool.query('SELECT * FROM videos', function(err, rows, fields){
+      if(err){
+        next(err);
+        return;
+      }
+	    context.results = JSON.parse(JSON.stringify(rows));
+	    res.redirect('/videos');
+	});
   });
 });
 
@@ -265,8 +277,14 @@ app.get('/competitions/edit',function(req,res,next){
       next(err);
       return;
     }
-    context.results = JSON.parse(JSON.stringify(rows));
-    res.redirect('/competitions');
+    mysql.pool.query('SELECT * FROM competitions', function(err, rows, fields){
+      if(err){
+        next(err);
+        return;
+      }
+	    context.results = JSON.parse(JSON.stringify(rows));
+	    res.redirect('/competitions');
+	});
   });
 });
 
@@ -344,8 +362,14 @@ app.get('/comments/edit',function(req,res,next){
       next(err);
       return;
     }
-    context.results = JSON.parse(JSON.stringify(rows));
-    res.redirect('/comments');
+    mysql.pool.query('SELECT * FROM comments', function(err, rows, fields){
+      if(err){
+        next(err);
+        return;
+      }
+	    context.results = JSON.parse(JSON.stringify(rows));
+	    res.redirect('/comments');
+	});
   });
 });
 
