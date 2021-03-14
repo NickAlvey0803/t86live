@@ -110,7 +110,7 @@ app.get('/videos',function(req,res,next){
   var context = {};
   var params = [];
   var query_rows;
-	mysql.pool.query('SELECT videos.uid,title,video_description,category,weight,uploader_weight,AVG(comments.light_score) AS aveg FROM videos JOIN comments ON comments.vid = videos.video_id GROUP BY videos.video_id', function(err, rows, fields){
+	mysql.pool.query('SELECT (SELECT username FROM users WHERE users.user_id = videos.uid) AS username,title,video_description,category,weight,uploader_weight,AVG(comments.light_score) AS aveg FROM videos LEFT JOIN comments ON comments.vid = videos.video_id GROUP BY videos.video_id', function(err, rows, fields){
     if(err){
       next(err);
       return;
