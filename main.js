@@ -121,6 +121,21 @@ app.get('/videos',function(req,res,next){
   });
 });
 
+app.get('/videos/search',function(req,res,next){
+	var context = {};
+	var params = [];
+	var query_rows;
+	mysql.pool.query('SELECT (SELECT username FROM users WHERE users.user_id = videos.uid) AS username,title,video_description,category,weight,uploader_weight,AVG(comments.light_score) AS aveg FROM videos LEFT JOIN comments ON comments.vid = videos.video_id JOIN users ON users.user_id = videos.uid WHERE users.username = ? GROUP BY videos.video_id', [req.query.search], function(err,rows,fields){
+	if(err){
+		next(err);
+		return;
+	}
+	query_rows = JSON.parse(JSON.stringify(rows));
+	context.results = query_rows;
+	res.render('videos-view',context);
+	});
+});
+
 app.get('/videos/insert',function(req,res,next){
   var context = {};
   mysql.pool.query("INSERT INTO videos (`uid`, `title`, `video_description`, `category`, `weight`, `uploader_weight`, `light_score`) VALUES ((SELECT user_id AS uid FROM users WHERE username = ?),?,?,?,?,?,?);", 
