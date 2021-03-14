@@ -79,7 +79,7 @@ app.get('/users/delete',function(req,res,next){
   });
 });
 
-app.get('/users/update',function(req,res,next){
+app.get('/users/edit',function(req,res,next){
   var context = {};
   console.log("Edit user request attempted");
   console.log(req.query.user_id_edit);
@@ -163,7 +163,7 @@ app.get('/videos/delete',function(req,res,next){
   });
 });
 
-app.get('/videos/update',function(req,res,next){
+app.get('/videos/edit',function(req,res,next){
   var context = {};
   console.log("Edit video request attempted");
   console.log(req.query.video_id_edit);
@@ -250,7 +250,7 @@ app.get('/competitions/delete',function(req,res,next){
   });
 });
 
-app.get('/competitions/update',function(req,res,next){
+app.get('/competitions/edit',function(req,res,next){
   var context = {};
   console.log("Edit competition request attempted");
   console.log(req.query.competition_id_edit);
@@ -335,7 +335,7 @@ app.get('/comments/delete',function(req,res,next){
   });
 });
 
-app.get('/comments/update',function(req,res,next){
+app.get('/comments/edit',function(req,res,next){
   var context = {};
   console.log("Edit comments request attempted");
   console.log(req.query.comment_uid_edit);
