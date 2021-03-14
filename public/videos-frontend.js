@@ -16,10 +16,10 @@ function bindButtons(){
       
 
       
-      console.log('http://flip3.engr.oregonstate.edu:52113/videos/insert?uid=' + payload.uid + '&title=' + payload.title + '&video_description=' + payload.video_description + '&category=' + payload.category + '&weight=' 
+      console.log('http://flip3.engr.oregonstate.edu:52114/videos/insert?uid=' + payload.uid + '&title=' + payload.title + '&video_description=' + payload.video_description + '&category=' + payload.category + '&weight=' 
         + payload.weight + '&uploader_weight='+ payload.uploader_weight + '&light_score=' + payload.light_score);
 
-      req.open('GET', 'http://flip3.engr.oregonstate.edu:52113/videos/insert?uid=' + payload.uid + '&title=' + payload.title + '&video_description=' + payload.video_description + '&category=' + payload.category + '&weight=' 
+      req.open('GET', 'http://flip3.engr.oregonstate.edu:52114/videos/insert?uid=' + payload.uid + '&title=' + payload.title + '&video_description=' + payload.video_description + '&category=' + payload.category + '&weight=' 
         + payload.weight + '&uploader_weight='+ payload.uploader_weight + '&light_score=' + payload.light_score);
       
 
@@ -45,7 +45,7 @@ function bindButtons2(){
         payload.video_id = document.getElementById("video_id").value;
         console.log(payload.video_id)
 
-        req.open('GET', 'http://flip3.engr.oregonstate.edu:52113/videos/delete/title=' + payload.video_id, true);
+        req.open('GET', 'http://flip3.engr.oregonstate.edu:52114/videos/delete/title=' + payload.video_id, true);
 
         req.setRequestHeader('Content-Type', 'application/json');
 
@@ -67,7 +67,7 @@ function bindButtons3(){
         payload.video_id = document.getElementById("video_id_edit").value;
         console.log(payload.video_id)
 
-        req.open('GET', 'http://flip3.engr.oregonstate.edu:52113/videos/edit' + payload.video_id, true);
+        req.open('GET', 'http://flip3.engr.oregonstate.edu:52114/videos/edit' + payload.video_id, true);
 
         req.setRequestHeader('Content-Type', 'application/json');
 

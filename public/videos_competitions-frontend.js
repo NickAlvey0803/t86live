@@ -9,10 +9,10 @@ function bindButtons(){
       payload.cid = document.getElementById('cid').value;
 
       
-      console.log('http://flip3.engr.oregonstate.edu:52113/videos_competitions/insert?vid=' + payload.vid + '&cid=' 
+      console.log('http://flip3.engr.oregonstate.edu:52114/videos_competitions/insert?vid=' + payload.vid + '&cid=' 
         + payload.cid);
 
-      req.open('GET', 'http://flip3.engr.oregonstate.edu:52113/videos_competitions/insert?vid=' + payload.vid + '&cid=' 
+      req.open('GET', 'http://flip3.engr.oregonstate.edu:52114/videos_competitions/insert?vid=' + payload.vid + '&cid=' 
         + cid);
       
 
@@ -36,7 +36,7 @@ function bindButtons2(){
         var payload = {id:null};
         payload.id = getElementById("id").value;
 
-        req.open('GET', 'http://flip3.engr.oregonstate.edu:52113/videos_competitions/delete?videos_competitions_id=' + payload.id, true);
+        req.open('GET', 'http://flip3.engr.oregonstate.edu:52114/videos_competitions/delete?videos_competitions_id=' + payload.id, true);
 
         req.setRequestHeader('Content-Type', 'application/json');
 
