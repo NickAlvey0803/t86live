@@ -246,9 +246,9 @@ app.get('/comments/insert',function(req,res,next){
 app.get('/comments/delete',function(req,res,next){
   var context = {};
   console.log("Delete comments request attempted");
-  console.log(req.query.uid);
-  console.log(req.query.vid);
-  mysql.pool.query("DELETE FROM comments WHERE uid=? AND vid=?", [req.query.uid, req.query.vid], function(err, result){
+  console.log(req.query.comment_uid);
+  console.log(req.query.comment_vid);
+  mysql.pool.query("DELETE FROM comments WHERE uid=? AND vid=?", [req.query.comment_uid, req.query.comment_vid], function(err, result){
     if(err){
       next(err);
       return;
