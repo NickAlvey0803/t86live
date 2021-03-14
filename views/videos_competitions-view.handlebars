@@ -39,6 +39,17 @@
   </fieldset>
 </form>
 
+<form action="/videos_competitions/delete" method="get">
+  <fieldset>
+    <legend>Delete a Video/Competition Relationship</legend>
+    <label for="video_competition_vid">Enter the Video ID of the Relationship to Delete: </label>
+    <input type="text" name="video_competition_vid" id="video_competition_vid">
+    <label for="video_competition_cid">Enter the Competition ID of the Relationship to Delete: </label>
+    <input type="text" name="video_competition_cid" video_competition_cid">
+    <input type="submit" id = "deleteSubmit" value="DELETE RELATIONSHIP">
+  </fieldset>
+</form>
+
 <table class= "bodydiv">
 
     <tr>
