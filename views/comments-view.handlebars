@@ -59,8 +59,14 @@
 <form action="/comments/edit" action="get">
   <fieldset>
     <legend>Edit a Comment</legend>
-    <label for="comment_id_edit">Enter the ID of the Comment to Delete: </label>
-    <input type="text" name="comment_id_edit" id="comment_id_edit">
+    <label for="comment_uid_edit">Enter the User ID of the Comment to Edit: </label>
+    <input type="text" name="comment_uid_edit" id="comment_uid_edit">
+    <label for="comment_vid_edit">Enter the Video ID of the Comment to Edit: </label>
+    <input type="text" name="comment_vid_edit" id="comment_vid_edit">
+    <label for="description_edit">Enter Your New Comment: </label>
+    <input type="text" name="description_edit" id="description_edit">
+    <label for="light_score_edit">Enter the New Score (enter TRUE for a White Light and FALSE for a Red Light): </label>
+    <input type="text" name="light_score_edit" id="light_score_edit">
     <input type="submit" id = "editSubmit" value="EDIT COMMENT">
   </fieldset>
 </form>

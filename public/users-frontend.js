@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', bindButtons3)
 function bindButtons(){
   document.getElementById('userSubmit').addEventListener('click', function(event){
       var req = new XMLHttpRequest();
-      var payload = {username:null, weight:null, description:null, user_score:null};
+      var payload = {username:null, password:null, description:null, user_score:null};
       payload.username = document.getElementById('username').value;
       payload.password = document.getElementById('password').value;
       payload.description = document.getElementById('description').value;
@@ -60,10 +60,15 @@ function bindButtons2(){
 function bindButtons3(){
      document.getElementById('editSubmit').addEventListener('click', function(event){
         var req = new XMLHttpRequest();
-        var payload = {user_id:null};
-        payload.user_id = getElementById("user_id_edit").value;
+        var payload = {user_id_edit:null, password_edit:null, description_edit:null, user_score_edit:null};
+        payload.user_id_edit = getElementById("user_id_edit").value;
+        payload.password_edit = document.getElementById('password_edit').value;
+        payload.description_edit = document.getElementById('description_edit').value;
+        payload.user_score_edit = document.getElementById('user_score_edit').value;
 
-        req.open('GET', 'http://flip3.engr.oregonstate.edu:52113/users/edit' + payload.user_id, true);
+
+        req.open('GET', 'http://flip3.engr.oregonstate.edu:52114/users/edit?username=' + payload.user_id_edit + '&password=' 
+        + payload.password_edit + '&description='+ payload.description_edit + '&user_score=' + payload.user_score_edit, true);
 
         req.setRequestHeader('Content-Type', 'application/json');
 

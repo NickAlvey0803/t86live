@@ -59,10 +59,13 @@ function bindButtons2(){
 function bindButtons3(){
      document.getElementById('editSubmit').addEventListener('click', function(event){
         var req = new XMLHttpRequest();
-        var payload = {id:null};
-        payload.id = getElementById("id").value;
+        var payload = {commment_uid_edit:null,commment_vid_edit:null, description_edit:null, light_score_edit:null};
+        payload.comment_uid_edit = getElementById("comment_uid_edit").value;
+        payload.comment_vid_edit = getElementById("comment_vid_edit").value;
+        payload.description_edit = document.getElementById('description_edit').value;
+      	payload.light_score_edit = document.getElementById('light_score_edit').value;
 
-        req.open('GET', 'http://localhost:3000/delete?id=' + payload.id, true);
+        req.open('GET', 'http://flip3.engr.oregonstate.edu:52114/comments/edit?uid=' + payload.comment_uid_edit + '&vid=' + payload.comment_vid_edit + '&description='+ payload.description_edit + '&light_score=' + payload.light_score_edit, true);
 
         req.setRequestHeader('Content-Type', 'application/json');
 

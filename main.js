@@ -79,7 +79,30 @@ app.get('/users/delete',function(req,res,next){
   });
 });
 
-
+app.get('/users/update',function(req,res,next){
+  var context = {};
+  console.log("Edit user request attempted");
+  console.log(req.query.user_id_edit);
+  mysql.pool.query("SELECT * FROM users WHERE username = ?", [req.query.user_id_edit], function(err, result){
+    if(err){
+      next(err);
+      return;
+    }
+    if(result.length == 1){
+      var curVals = result[0];
+      mysql.pool.query("UPDATE users SET password=?, description=?, user_score=? WHERE username=?",
+        [req.query.password_edit || curVals.password_edit, req.query.description_edit || curVals.description_edit, req.query.user_score_edit || curVals.user_score_edit, req.query.user_id_edit],
+        function(err, result){
+        if(err){
+          next(err);
+          return;
+        }
+        context.results = JSON.parse(JSON.stringify(rows));
+        res.redirect('/users');
+      });
+    }
+  });
+});
 
 // Videos
 
@@ -140,6 +163,30 @@ app.get('/videos/delete',function(req,res,next){
   });
 });
 
+app.get('/videos/update',function(req,res,next){
+  var context = {};
+  console.log("Edit video request attempted");
+  console.log(req.query.video_id_edit);
+  mysql.pool.query("SELECT * FROM videos WHERE title = ?", [req.query.video_id_edit], function(err, result){
+    if(err){
+      next(err);
+      return;
+    }
+    if(result.length == 1){
+      var curVals = result[0];
+      mysql.pool.query("UPDATE videos SET video_description=?, category=?, weight=?, uploader_weight=?, light_score=? WHERE title=?",
+        [req.query.video_description_edit || curVals.video_description_edit, req.query.category_edit || curVals.category_edit, req.query.weight_edit || curVals.weight_edit, req.query.uploader_weight_edit || curVals.uploader_weight_edit, req.query.light_score_edit || curVals.light_score_edit, req.query.video_id_edit],
+        function(err, result){
+        if(err){
+          next(err);
+          return;
+        }
+        context.results = JSON.parse(JSON.stringify(rows));
+        res.redirect('/videos');
+      });
+    }
+  });
+});
 
 
 // Competitions
@@ -203,7 +250,30 @@ app.get('/competitions/delete',function(req,res,next){
   });
 });
 
-
+app.get('/competitions/update',function(req,res,next){
+  var context = {};
+  console.log("Edit competition request attempted");
+  console.log(req.query.competition_id_edit);
+  mysql.pool.query("SELECT * FROM competitions WHERE competition_name = ?", [req.query.competition_id_edit], function(err, result){
+    if(err){
+      next(err);
+      return;
+    }
+    if(result.length == 1){
+      var curVals = result[0];
+      mysql.pool.query("UPDATE competitions SET lift_type=?, weight_class=?, lift_reps=? WHERE competition_name=?",
+        [req.query.lift_type_edit || curVals.lift_type_edit, req.query.weight_class_edit || curVals.weight_class_edit, req.query.lift_reps_edit || curVals.lift_reps_edit, req.query.competition_id_edit],
+        function(err, result){
+        if(err){
+          next(err);
+          return;
+        }
+        context.results = JSON.parse(JSON.stringify(rows));
+        res.redirect('/competitions');
+      });
+    }
+  });
+});
 
 // Comments
 
@@ -265,6 +335,31 @@ app.get('/comments/delete',function(req,res,next){
   });
 });
 
+app.get('/comments/update',function(req,res,next){
+  var context = {};
+  console.log("Edit comments request attempted");
+  console.log(req.query.comment_uid_edit);
+  console.log(req.query.comment_vid_edit);
+  mysql.pool.query("SELECT * FROM comments WHERE uid=? AND vid=?", [req.query.comment_uid_edit, req.query.comment_vid_edit], function(err, result){
+    if(err){
+      next(err);
+      return;
+    }
+    if(result.length == 1){
+      var curVals = result[0];
+      mysql.pool.query("UPDATE competitions SET description=?, light_score=?, WHERE uid=? AND vid=?",
+        [req.query.description_edit || curVals.description_edit, req.query.light_score_edit || curVals.light_score_edit, req.query.comment_uid_edit, req.query.comment_vid_edit],
+        function(err, result){
+        if(err){
+          next(err);
+          return;
+        }
+        context.results = JSON.parse(JSON.stringify(rows));
+        res.redirect('/comments');
+      });
+    }
+  });
+});
 
 
 // Videos_Competitions
@@ -307,7 +402,7 @@ app.get('/videos_competitions/insert',function(req,res,next){
 
 app.get('/videos_competitions/delete',function(req,res,next){
   var context = {};
-  mysql.pool.query("DELETE FROM videos_competitions WHERE id=?", [req.query.id], function(err, result){
+  mysql.pool.query("DELETE FROM videos_competitions WHERE vid=? AND cid=?", [req.query.videos_competitions_vid, req.query.videos_competitions_cid], function(err, result){
     if(err){
       next(err);
       return;

@@ -58,10 +58,15 @@ function bindButtons2(){
 function bindButtons3(){
      document.getElementById('editSubmit').addEventListener('click', function(event){
         var req = new XMLHttpRequest();
-        var payload = {competition_id:null};
-        payload.competition_id = getElementById("competition_id_edit").value;
+        var payload = {competition_id_edit:null, lift_type_edit:null, weight_class_edit:null, lift_reps_edit:null};
+        payload.competition_id_edit = getElementById("competition_id_edit").value;
+        payload.lift_type_edit = document.getElementById('lift_type_edit').value;
+        payload.weight_class_edit = document.getElementById('weight_class_edit').value;
+        payload.lift_reps_edit = document.getElementById('lift_reps_edit').value;
 
-        req.open('GET', 'http://flip3.engr.oregonstate.edu:52114/competitions/edit' + payload.competition_id, true);
+
+        req.open('GET', 'http://flip3.engr.oregonstate.edu:52114/competitions/edit?competition_name=' + payload.competition_id_edit + '&lift_type=' 
+        + payload.lift_type_edit + '&weight_class='+ payload.weight_class_edit + '&lift_reps=' + payload.lift_reps_edit, true);
 
         req.setRequestHeader('Content-Type', 'application/json');
 

@@ -55,9 +55,15 @@
 
 <form action="/users/edit" method="get">
   <fieldset>
-    <legend>Delete a User</legend>
+    <legend>Edit a User</legend>
     <label for="user_id_edit">Enter the Name of the User to Edit: </label>
-    <input type="text" name=""user_id_edit" id= "user_id_edit">
+    <input type="text" name="user_id_edit" id= "user_id_edit">
+    <label for="password_edit">Enter the New Password: </label>
+    <input type="text" name="password_edit" id= "password_edit">
+    <label for="description_edit">Enter the New User Description: </label>
+    <input type="text" name="description_edit" id= "description_edit">
+    <label for="user_score_edit">Enter the New User Score: </label>
+    <input type="text" name="user_score_edit" id= "user_score_edit">
     <input type="submit" id = "editSubmit" value="EDIT USER">
   </fieldset>
 </form>
