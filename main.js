@@ -13,7 +13,7 @@ app.engine('handlebars', handlebars.engine);
 var session = require('express-session');
 var bodyParser = require('body-parser');
 app.set('view engine', 'handlebars');
-app.set('port', 59114);
+app.set('port', 52115);
 
 
 app.use(bodyParser.urlencoded({ extended: false }));

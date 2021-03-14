@@ -45,7 +45,7 @@ function bindButtons2(){
         payload.video_id = document.getElementById("video_id").value;
         console.log(payload.video_id)
 
-        req.open('GET', 'http://flip3.engr.oregonstate.edu:52114/videos/delete/title=' + payload.video_id, true);
+        req.open('GET', 'http://flip3.engr.oregonstate.edu:52114/videos/delete?title=' + payload.video_id, true);
 
         req.setRequestHeader('Content-Type', 'application/json');
 

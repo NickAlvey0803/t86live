@@ -39,6 +39,7 @@ function bindButtons2(){
         var req = new XMLHttpRequest();
         var payload = {user_id:null};
         payload.user_id = getElementById("user_id").value;
+        console.log(payload.user_id)
 
         req.open('GET', 'http://flip3.engr.oregonstate.edu:52114/users/delete?username=' + payload.user_id, true);
 
