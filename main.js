@@ -121,6 +121,8 @@ app.get('/videos/insert',function(req,res,next){
 
 app.get('/videos/delete',function(req,res,next){
   var context = {};
+  console.log("Delete video request attempted");
+  console.log(req.query.user_id);
   mysql.pool.query("DELETE FROM videos WHERE title=?", [req.query.video_id], function(err, result){
     if(err){
       next(err);
@@ -182,6 +184,8 @@ app.get('/competitions/insert',function(req,res,next){
 
 app.get('/competitions/delete',function(req,res,next){
   var context = {};
+  console.log("Delete competitions request attempted");
+  console.log(req.query.user_id);
   mysql.pool.query("DELETE FROM competitions WHERE competition_name=?", [req.query.competition_id], function(err, result){
     if(err){
       next(err);
