@@ -47,8 +47,10 @@
 <form action="/comments/delete" action="get">
   <fieldset>
     <legend>Delete a Comment</legend>
-    <label for="comment_id">Enter the ID of the Comment to Delete: </label>
-    <input type="text" name="comment_id" id="comment_id">
+    <label for="comment_uid">Enter the User ID of the Comment to Delete: </label>
+    <input type="text" name="comment_uid" id="comment_uid">
+    <label for="comment_vid">Enter the Video ID of the Comment to Delete: </label>
+    <input type="text" name="comment_vid" id="comment_vid">
     <input type="submit" id = "deleteSubmit" value="DELETE COMMENT">
   </fieldset>
 </form>
