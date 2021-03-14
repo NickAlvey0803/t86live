@@ -102,25 +102,6 @@ app.get('/users/edit',function(req,res,next){
 });
 
 
-  ///simple-update?id=2&name=The+Task&done=false&due=2015-12-5
-// app.get('/simple-update',function(req,res,next){
-//   var context = {};
-//   mysql.pool.query("UPDATE workouts SET name=?, done=?, due=? WHERE id=? ",
-//     [req.query.name, req.query.done, req.query.due, req.query.id],
-//     function(err, result){
-//     if(err){
-//       next(err);
-//       return;
-//     }
-//     context.results = JSON.parse(JSON.stringify(rows));
-//     res.render('users-view',context);
-//   });
-// });
-
-
-
-
-
 // Videos
 
 
@@ -129,7 +110,8 @@ app.get('/videos',function(req,res,next){
   var context = {};
   var params = [];
   var query_rows;
-	mysql.pool.query('SELECT title,video_description,category,weight,uploader_weight,AVG(comments.light_score) AS aveg FROM videos JOIN comments ON comments.vid = videos.video_id', function(err, rows, fields){
+	// mysql.pool.query('SELECT videos.uid,title,video_description,category,weight,uploader_weight,AVG(comments.light_score) AS aveg FROM videos JOIN comments ON comments.vid = videos.video_id', function(err, rows, fields){
+	mysql.pool.query('SELECT * FROM videos', function(err, rows, fields){
     if(err){
       next(err);
       return;
