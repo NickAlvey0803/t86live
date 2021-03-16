@@ -31,10 +31,21 @@
 <form action="/videos_competitions/insert" action="get">
   <fieldset>
     <legend>Enter the Video Name or Competition Name</legend>
+
     <label for="vid">Enter the Video Title: </label>
-    <input type="text" name="vid" id="vid">
+    <select name="vid" id="vid">
+	    {{#each videos}}
+		<option value="{{this.video_id}}">{{this.title}}</option>
+	    {{/each}}
+    </select>
+
     <label for="cid">Enter the Competition Name: </label>
-    <input type="text" name="cid" id="cid">
+    <select name="cid" id="cid">
+	    {{#each competitions}}
+		<option value="{{this.competition_id}}">{{this.competition_name}}</option>
+	    {{/each}}
+    </select>
+
     <input type="submit" id="video_competitionSubmit", value = "SUBMIT VIDEO TO COMPETITION">
   </fieldset>
 </form>

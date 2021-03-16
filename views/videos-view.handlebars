@@ -123,12 +123,20 @@ ul.Navigation{
             </nav>
         </div>
     </div>
-
+{{#if not_search}}
 <form action="/videos/insert" action="get">
   <fieldset>
     <legend>Upload Some Information About Your Video</legend>
-    <label for="uid">Enter your Username: </label>
-    <input type="text" name="uid" id="uid">
+
+    <label for="uid">Choose your username: </label>
+    <select name="uid" id="uid">
+
+	{{#each users}}
+		<option value="{{this.user_id}}">{{this.username}}</option>
+	{{/each}}
+
+    </select>
+
     <label for="title">What is the Title of Your Video?: </label>
     <input type="text" name="title" id="title">
     <label for="video_description">Describe Your Video: </label>
@@ -173,7 +181,7 @@ ul.Navigation{
     <input type="submit" id = "editSubmit" value="EDIT VIDEO">
   </fieldset>
 </form>
-
+{{/if}}
 <form action="/videos/search" action="get">
 	<fieldset>
 		<legend> Search by username </legend>
@@ -196,7 +204,7 @@ ul.Navigation{
         <th>Light Score (0 Passing, 1 Not Passing)</th>
     </tr>
 
-    {{#each results}}
+    {{#each table}}
     <tr>
         <td>{{this.username}}</td>
         <td>{{this.title}}</td>

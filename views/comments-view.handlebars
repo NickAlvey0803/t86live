@@ -32,14 +32,25 @@
 <form action="/comments/insert" action="get">
   <fieldset>
     <legend>Upload Your Comment</legend>
-    <label for="uid">Enter Your Username: </label>
-    <input type="text" name="uid" id="uid">
-    <label for="vid">Enter the Title of the Video You Wish To Comment On: </label>
-    <input type="text" name="vid" id="vid">
+    <label for="uid">Choose Your Username: </label>
+    <select name="uid">
+	{{#each users}}
+		<option value="{{this.username}}">{{this.username}}</option>
+	{{/each}}
+    </select>
+    <label for="vid">Choose the video you want to comment on </label>
+    <select name="vid" id="vid>
+	{{#each vids}}
+		<option value="{{this.title}}">{{this.title}}</option>
+	{{/each}}
+    </select>
     <label for="description">Enter Your Comment: </label>
     <input type="text" name="description" id="description">
-    <label for="light_score">What Would You Score It (enter TRUE for a White Light and FALSE for a Red Light): </label>
-    <input type="text" name="light_score" id="light_score">
+    <label for="light_score">Seect your score light: </label>
+    <select name="light_score" id="light_score">
+	<option value=1>White</option>
+	<option value=0>Red</option>
+    </select>
     <input type="submit" id="commentSubmit" value="INPUT COMMENT">
   </fieldset>
 </form>
@@ -59,13 +70,18 @@
 <form action="/comments/edit" action="get">
   <fieldset>
     <legend>Edit a Comment</legend>
-    <label for="comment_uid_edit">Enter the User ID of the Comment to Edit: </label>
+    <label for="comment_uid_edit">Choose the user ID of the comment you want to edit: </label>
     <input type="text" name="comment_uid_edit" id="comment_uid_edit">
+    <select name="comment_uid_edit">
+	{{#each users}}
+		<option value="{{this.user_id}}">{{this.username}}</option>
+	{{/each}}
+    </select>
     <label for="comment_vid_edit">Enter the Video ID of the Comment to Edit: </label>
     <input type="text" name="comment_vid_edit" id="comment_vid_edit">
     <label for="description_edit">Enter Your New Comment: </label>
     <input type="text" name="description_edit" id="description_edit">
-    <label for="light_score_edit">Enter the New Score (enter TRUE for a White Light and FALSE for a Red Light): </label>
+    <label for="light_score_edit">Enter the New Score (enter 1 for a White Light and 0 for a Red Light): </label>
     <input type="text" name="light_score_edit" id="light_score_edit">
     <input type="submit" id = "editSubmit" value="EDIT COMMENT">
   </fieldset>
@@ -77,8 +93,8 @@
 
     <tr>
 
-        <th>UID</th>
-        <th>VID</th>
+        <th>User</th>
+        <th>Video</th>
         <th>Comment</th>
         <th>Light Score</th>
         
@@ -87,8 +103,8 @@
     {{#each results}}
     <tr>
         
-        <td>{{this.uid}}</td>
-        <td>{{this.vid}}</td>
+        <td>{{this.username}}</td>
+        <td>{{this.title}}</td>
         <td>{{this.description}}</td>
         <td>{{this.light_score}}</td>
         

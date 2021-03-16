@@ -13,7 +13,7 @@ app.engine('handlebars', handlebars.engine);
 var session = require('express-session');
 var bodyParser = require('body-parser');
 app.set('view engine', 'handlebars');
-app.set('port', 52115);
+app.set('port', 52114);
 
 
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -104,23 +104,57 @@ app.get('/users/edit',function(req,res,next){
 
 // Videos
 
-
+function query(sqlQuery) {
+	return new Promise(function (resolve,reject) {
+		mysql.pool.query(sqlQuery, function(err, result) {
+			if(err)
+			{
+				reject(err);
+			}
+			else
+			{
+				resolve(result);
+			}
+		});
+	});
+}
 
 app.get('/videos',function(req,res,next){
-  var context = {};
-  var params = [];
-  var query_rows;
+	var context = {};
+	var params = [];
+	var query_rows;
+	var query_rows2;
 	mysql.pool.query('SELECT (SELECT username FROM users WHERE users.user_id = videos.uid) AS username,title,video_description,category,weight,uploader_weight,AVG(comments.light_score) AS aveg FROM videos LEFT JOIN comments ON comments.vid = videos.video_id GROUP BY videos.video_id', function(err, rows, fields){
-    if(err){
-      next(err);
-      return;
-    }
-    query_rows = JSON.parse(JSON.stringify(rows));
-    context.results = query_rows;
-    res.render('videos-view', context);
-  });
+		if(err){
+		next(err);
+		return;
+		}
+		context.table = JSON.parse(JSON.stringify(rows));
+mysql.pool.query('SELECT user_id, username FROM users', function(err, rows2, fields){
+				if(err){
+				next(err);
+				return;
+				}
+				context.users = JSON.parse(JSON.stringify(rows2));
+				context.not_search = 1;
+				res.render('videos-view', context);
+		});
+	});
 });
 
+  /*
+	*/
+
+  /*
+   *
+  var query1 = query('SELECT (SELECT username FROM users WHERE users.user_id = videos.uid) AS username,title,video_description,category,weight,uploader_weight,AVG(comments.light_score) AS aveg FROM videos LEFT JOIN comments ON comments.vid = videos.video_id GROUP BY videos.video_id');
+  var query2 = query("SELECT username,user_id FROM users");
+  Promise.all(query1,query2).then(function(result) {
+	  context.table = query1;
+	  context.users = query2;
+	  res.render('videos-view',context);
+});
+   * */
 app.get('/videos/search',function(req,res,next){
 	var context = {};
 	var params = [];
@@ -131,14 +165,18 @@ app.get('/videos/search',function(req,res,next){
 		return;
 	}
 	query_rows = JSON.parse(JSON.stringify(rows));
-	context.results = query_rows;
+	context.table = query_rows;
 	res.render('videos-view',context);
 	});
 });
 
 app.get('/videos/insert',function(req,res,next){
   var context = {};
-  mysql.pool.query("INSERT INTO videos (`uid`, `title`, `video_description`, `category`, `weight`, `uploader_weight`, `light_score`) VALUES ((SELECT user_id AS uid FROM users WHERE username = ?),?,?,?,?,?,?);", 
+
+  console.log("Insert video request attempted:");
+  console.log(req.query.uid);
+
+  mysql.pool.query("INSERT INTO videos (`uid`, `title`, `video_description`, `category`, `weight`, `uploader_weight`, `light_score`) VALUES (?,?,?,?,?,?,?);", 
     [req.query.uid, req.query.title, req.query.video_description, req.query.category, req.query.weight, req.query.uploader_weight, req.query.light_score], function(err, result){
     if(err){
       next(err);
@@ -154,7 +192,6 @@ app.get('/videos/insert',function(req,res,next){
       res.redirect('/videos');
     });
   });
-  console.log("Insert video request attempted");
 });
 
 app.get('/videos/delete',function(req,res,next){
@@ -292,13 +329,27 @@ app.get('/competitions/edit',function(req,res,next){
 app.get('/comments',function(req,res,next){
   var context = {};
   var params = [];
-  mysql.pool.query('SELECT * FROM comments', function(err, rows, fields){
+  mysql.pool.query('SELECT comments.light_score, comments.description, users.username, videos.title FROM comments INNER JOIN users ON users.user_id = comments.uid INNER JOIN videos ON videos.video_id = comments.vid', function(err, rows, fields){
     if(err){
       next(err);
       return;
     }
     context.results = JSON.parse(JSON.stringify(rows));
-    res.render('comments-view', context);
+    mysql.pool.query('SELECT title FROM videos', function(err,rows,fields){
+	    if(err){
+		next(err);
+		return;
+	    }
+	    context.vids = JSON.parse(JSON.stringify(rows));
+	    mysql.pool.query('SELECT username FROM users', function(err,rows,fields){
+		    if(err){
+			    next(err);
+			    return;
+		    }
+		    context.users = JSON.parse(JSON.stringify(rows));
+		    res.render('comments-view', context);
+	    });
+    });
   });
 });
 
@@ -383,29 +434,40 @@ app.get('/videos_competitions',function(req,res,next){
       return;
     }
     context.results = JSON.parse(JSON.stringify(rows));
-    res.render('videos_competitions-view', context);
+    mysql.pool.query('SELECT * FROM videos',function(err,rows,fields)
+    {
+	    if(err){
+		next(err);
+		return;
+	    }
+	    context.videos = JSON.parse(JSON.stringify(rows));
+	    mysql.pool.query('SELECT * FROM competitions',function(err,rows,fields)
+	    {
+		    if(err){
+			    next(err);
+			    return;
+		    }
+		    context.competitions = JSON.parse(JSON.stringify(rows));
+		    res.render('videos_competitions-view', context);
+	    });
+    });
   });
 });
 
 app.get('/videos_competitions/insert',function(req,res,next){
   var context = {};
-  mysql.pool.query("INSERT INTO videos_competitions (`vid`, `cid`) VALUES ((SELECT video_id FROM videos WHERE title = ?),(SELECT competition_id FROM competitions WHERE competition_name = ?))", 
+  console.log('---');
+  console.log(req.query.cid);
+  console.log(req.query.vid);
+  console.log('---');
+  mysql.pool.query("INSERT INTO videos_competitions (`vid`, `cid`) VALUES (?,?)", 
     [req.query.vid, req.query.cid], function(err, result){
     if(err){
       next(err);
       return;
     }
-    mysql.pool.query('SELECT * FROM videos_competitions', function(err, rows, fields){
-      if(err){
-        next(err);
-        return;
-      }
-      context.results = JSON.parse(JSON.stringify(rows));
-//      res.render('videos_competitions-view', context);
 	res.redirect("/videos_competitions");
-    });
   });
-  console.log("Insert videos_competitions request attempted");
 });
 
 app.get('/videos_competitions/delete',function(req,res,next){
