@@ -461,7 +461,7 @@ app.get('/videos_competitions/insert',function(req,res,next){
   console.log(req.query.vid);
   console.log('---');
   mysql.pool.query("INSERT INTO videos_competitions (`vid`, `cid`) VALUES (?,?)", 
-    [req.query.vid, req.query.cid], function(err, result){
+    [req.query.cid, req.query.vid], function(err, result){
     if(err){
       next(err);
       return;
@@ -472,39 +472,21 @@ app.get('/videos_competitions/insert',function(req,res,next){
 
 app.get('/videos_competitions/delete',function(req,res,next){
   var context = {};
-  mysql.pool.query("DELETE FROM videos_competitions WHERE vid=? AND cid=?", [req.query.videos_competitions_vid, req.query.videos_competitions_cid], function(err, result){
+  console.log('delete---');
+  console.log(req.query.video_competition_vid);
+  console.log(req.query.video_competition_cid);
+  console.log('delete---');
+  mysql.pool.query("DELETE FROM videos_competitions WHERE vid=? AND cid=?", [req.query.video_competition_vid, req.query.video_competition_cid], function(err, result){
     if(err){
       next(err);
       return;
     }
-    mysql.pool.query('SELECT * FROM videos_competitions', function(err, rows, fields){
-      if(err){
-        next(err);
-        return;
-      }
-      context.results = JSON.parse(JSON.stringify(rows));
-      // res.render('videos_competitions-view', context);
       res.redirect('/videos_competitions');
     });
-  });
 });
 
 
 
-///simple-update?id=2&name=The+Task&done=false&due=2015-12-5
-// app.get('/simple-update',function(req,res,next){
-//   var context = {};
-//   mysql.pool.query("UPDATE workouts SET name=?, done=?, due=? WHERE id=? ",
-//     [req.query.name, req.query.done, req.query.due, req.query.id],
-//     function(err, result){
-//     if(err){
-//       next(err);
-//       return;
-//     }
-//     context.results = JSON.parse(JSON.stringify(rows));
-//     res.render('users-view',context);
-//   });
-// });
 
 ///safe-update?id=1&name=The+Task&done=false
 app.get('/safe-update',function(req,res,next){
